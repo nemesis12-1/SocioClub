@@ -1,0 +1,118 @@
+* {
+    margin: 0%;
+    padding: 0%;
+    box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
+}
+
+body {
+    height: 100vh;
+}
+
+.maintenance-container{
+    background-color: lightcoral;
+    display: flex;
+    height: calc(100vh - 8vw);
+    width: 100vw;
+}
+
+.mt-left {
+    width: 65%;
+    /* height: 100%; */
+    background-color: #9881ff;
+}
+
+.mt-right {
+    width: 35%;
+    /* height: 100%; */
+    background-color: #15fec4;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.mt-right form {
+    margin: 10px 0;
+    display: flex;
+    flex-direction: column;
+    margin: 10px;
+}
+
+.mt-right form > * {
+    /* background-color: burlywood; */
+    margin: 10px;
+    font-size: 1.5rem;
+    letter-spacing: 2px;
+}
+
+.mt-right form input[type="text"]::placeholder, option {
+    font-size: 1.5rem; 
+}
+
+.mt-right form label {
+    font-size: 1.2rem;
+}
+
+
+.mt-right form input[type=submit] {
+    width: 100%;
+    background-color: #ff436a;
+    color: white;
+    font-weight: bolder;
+    padding: 14px 20px;
+    margin: 6px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 20px;
+}
+.mt-left h3{
+
+letter-spacing: 3px;
+padding: 10px;
+font-weight: 50px;
+
+
+}
+table{
+
+    border-collapse: collapse;
+    width: 100%;
+    font-family: 'Montserrat', sans-serif;
+    
+
+}
+
+td , th {
+
+    border: 2px soild red;
+    text-align: center;
+    padding: 8px;
+    letter-spacing: 2px;
+}
+
+tr:nth-child(even){
+
+    background-color: #fff07f;
+}
+
+.normal-text{
+
+margin-top: 40px;
+padding: 60px;
+font-weight: bolder;
+font-size: 30px;
+letter-spacing: 2px;
+background-color: rgb(255, 255, 255);
+width: 70%;
+box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+/*
+-- TO DO LIST --
+button animation
+button size fix
+
+
+*/

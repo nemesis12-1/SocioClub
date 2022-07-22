@@ -1,0 +1,204 @@
+{% extends "base.html" %}
+{% load static %}
+{%block titleblock%} SocioClub | Sign-up {% endblock %}
+{% url 'login' as login %}
+{% url 'signup' as signup %}
+
+
+{%block cssblock%}
+<link rel="stylesheet" href="{% static 'css/signup.css'%}"> {%endblock%}
+
+{% block mainblock %}
+<div class="container">
+
+    <div class="left-main">
+        <h4 class="heading-right">Already a Member? <a href="{% url 'login' %}">Sign In </a></h4>
+
+        {% if success %}
+        <h3 class=" heading-left">Successfully Signed Up to SocioClub</h3>
+        {% else %}
+        <h3 class=" heading-left">Sign up to SocioClub</h3>
+        {% endif %}
+
+        {% if success %}
+        {% else %}
+
+        <div class="form-container">
+
+            <form class="login-form-1" autocomplete="off">
+                {% csrf_token %}
+
+                <div class="user-details">
+                    <div class="input-box">
+                        <label class="details">Name </label><br>
+                        <input name="name" type="text" id="name" placeholder="Enter Your First and Last Name" required>
+                    </div>
+                    <div class="input-box">
+                        <label class="details">Username</label><br>
+                        <input name="username" autocomplete="false" type="text" id="username" autocomplete="off"
+                            placeholder="Enter your username" required><br>
+                    </div>
+                </div>
+
+                <label>Email Address</label><br>
+                <input name="email" autocomplete="false" type="email" id="email" placeholder="Enter your email"
+                    required><br>
+                <label>Password</label><br>
+                <input name="pass1" type="password" id="password1" autocomplete="off" placeholder="6+ characters"
+                    required><br>
+                <label>Confirm Password</label><br>
+                <input name="pass2" type="password" id="password2" placeholder="6+ characters" required><br>
+                <input type="submit" value="Next" id="next-btn">
+
+            </form>
+
+            <form method="POST" action="{% url 'signup' %}" class="login-form-2">
+                {% csrf_token %}
+
+                <input name="name" type="text" class="hide">
+                <input name="username" type="text" class="hide">
+                <input name="email" type="text" class="hide">
+                <input name="pass1" type="text" class="hide">
+                <input name="pass2" type="text" class="hide">
+
+                <label>Phone No.</label>
+                <input name="phone" type="tel" pattern="[0-9]{10}" required id="phone">
+                <label>Flat / Wing No.</label>
+                <input name="flatno" type="text" required id="flat">
+                <label>Society Name</label>
+                <select name="society_name" required id="society_name">
+                    <option value="" disabled selected hidden>- Select Your Society -</option>
+                    <option value="Society 1">Society 1</option>
+                    <option value="Society 2">Society 2</option>
+                    <option value="Society 3">Society 3</option>
+                    <option value="Society 4">Society 4</option>
+                </select>
+                <div class="tandc">
+                    <input type="radio" name="tc" required><span>
+                        Creating an account means you are okay with our Terms of Service, Privacy Policy, and our
+                        default Notification Settings.
+                    </span>
+                </div>
+                <div class="signup-button">
+                    <input type="button" id="back-btn" value="Back">
+                    <input type="submit" id="create-btn" value="Create Account">
+                </div>
+            </form>
+        </div>
+
+        {% endif %}
+
+    </div>
+
+
+    <div class="right-main">
+        <img src="{% static 'images/signup1.png' %}" alt="building image ">
+    </div>
+
+
+</div>
+
+<script>
+    var form1 = document.querySelector(".login-form-1")
+    var form2 = document.querySelector(".login-form-2")
+
+    var next = document.getElementById("next-btn")
+    var back = document.getElementById("back-btn")
+    var create = document.getElementById("create-btn")
+
+    var form1_inputs = [...form1.querySelectorAll("input")];
+    form1_inputs.pop(); // to remove input type button 
+
+    var form2_inputs = [...form2.querySelectorAll("input")];
+
+    var allValid = false;
+
+
+    form1.addEventListener("click", function (event) {
+        event.preventDefault();
+    })
+
+    next.onclick = function () {
+
+        for (i = 0; i < form1_inputs.length; i++) {
+            // console.log(form1_inputs[i]);
+            if (!form1_inputs[i].reportValidity()) {
+                console.log("-------");
+                console.log("");
+                console.log(form1_inputs[i]);
+                console.log("is wrong");
+                allValid = false;
+                break;
+            }
+            allValid = true;
+        }
+
+        // if (form1_inputs[3].value.length < 6 && form1_inputs[4].value.length < 6) {
+        //     form1_inputs[3].value = "";
+        //     form1_inputs[4].value = "";
+        //     allValid = false;
+        // }
+        // if (form1_inputs[3].value != form1_inputs[4].value) {
+        //     allValid = false;
+        //     form1_inputs[3].value = "";
+        //     form1_inputs[4].value = "";
+        //     form1_inputs[3].placeholder = "PASSWORDS DO NOT MATCH";
+        //     form1_inputs[4].placeholder = "PASSWORDS DO NOT MATCH";
+        //     // form1_inputs[3].focus();
+        //     document.getElementById("password1").focus();
+
+        // }
+
+        if (allValid) {
+            form1.style.left = "-150%";
+            form2.style.left = "0";
+
+            for (i = 1; i < form1_inputs.length; i++) {
+                form2_inputs[i].value = form1_inputs[i].value
+            }
+        }
+
+    }
+
+    back.onclick = function () {
+        form1.style.left = "0";
+        form2.style.left = "150%";
+    }
+
+    // console.log("form2 inputs: ")
+    // for (i = 0; i < form2_inputs.length; i++) {
+    //         console.log(form2_inputs[i])
+    //     }
+
+
+    {% if error %}
+
+    document.getElementById("name").value = "{{context.name}}";
+    document.getElementById("username").value = "{{context.username}}";
+    document.getElementById("email").value = "{{context.email}}";
+    document.getElementById("phone").value = "{{context.phone}}";
+    document.getElementById("flat").value = "{{context.flat}}";
+    document.getElementById("society_name").value = "{{context.society_name}}";
+
+    {% endif %}
+
+
+    {% if error == "Username exists" %}
+    form1_inputs[2].value = "";
+    form1_inputs[2].placeholder = "Username Exists";
+    document.getElementById("username").classList.add("error");
+    document.getElementById("username").focus();
+    {% endif %}
+
+    {% if error == "Email exists" %}
+    form1_inputs[3].value = "";
+    form1_inputs[3].placeholder = "Email Exists ";
+    document.getElementById("email").classList.add("error");
+    document.getElementById("email").focus();
+    {% endif %}
+
+
+</script>
+
+
+{% endblock %}

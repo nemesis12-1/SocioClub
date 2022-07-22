@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+{% load static %}
+{%block titleblock%} SocioClub | Complain {% endblock %}
+
+
+{%block cssblock%}
+<link rel="stylesheet" href="{% static 'css/complain.css'%}"> {%endblock%}
+
+{% block mainblock %}
+
+<div class="complain-container">
+
+
+    <div class="complain-left">
+
+
+    </div>
+
+
+    <form method="POST" action="{% url 'complain' %}"class="complain-form-container">
+        {% csrf_token %}
+
+        {% if success %}
+        <h3>Successfully Submitted</h3>
+        {% else %}
+        <h3>Complaint Form</h3>
+        
+        
+        <div class="input-field">
+            <hr>
+            <label> Complaint Name </label>
+            <input type="text" name="complain_name">
+        </div>
+        <div class="input-field">
+            <label> Complaint Type </label>
+            <select name="complain_type">
+                <option value="Personal">Personal</option>
+                <option value="Society">Society</option>
+            </select>
+        </div>
+        <div class="input-field">
+            <label> Details about your complaint </label>
+            <textarea id="details" name="complain_description" rows="5" placeholder="Write something.." required></textarea>
+        </div>
+        <div class="input-field">
+            <label> How can we make things right </label>
+            <textarea id="things-right" name="complain_solution" rows="5" placeholder="Write something.." required></textarea>
+        </div>
+        <input class="submit-btn" type="submit" value="Send Message">
+
+        {% endif %}
+
+    </form>
+
+    <div class="complain-right">
+
+       <div class="view-box">
+         <a href="{% url 'add_complain' %}">Add Complain</a>
+         <a href="{% url 'complain' %}">View Complain</a>
+       </div>
+    </div>
+
+</div>
+
+
+<!-- 
+    1. complain date   
+    2. complain name
+    3. complain type
+    4. resolved status
+ -->
+
+{% endblock %}

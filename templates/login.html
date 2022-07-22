@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% load static %}
+{%block titleblock%} SocioClub | Login {% endblock %}
+{% url 'signup' as signup %}
+
+
+{%block cssblock%} <link rel="stylesheet" href="{% static 'css/login.css'%}"> {%endblock%}
+
+{% block mainblock %}
+    <div class="container">
+
+        <div class="left-main">
+            <img src="{% static 'images/login.png' %}" alt="building image ">
+        </div>
+
+        <div class="right-main">
+            <h4 class="heading-right">Not a Member? <a href="{% url 'signup' %}">Sign up now </a></h4>
+
+            <form class="login-form" method="POST" action="{% url 'login' %}">
+                {% csrf_token %} 
+                <h3 class=" heading-left">Sign in to SocioClub</h3>
+                <label >Username/Email/Phone</label><br>
+                <input id="login-info" name="info" type="text" placeholder="Enter Your Phone/Email/Username"><br>
+
+                <label >Password <span > <a href="#">Forgot Password?</a> </span></label><br>
+             
+                <input id="login-pass" name="password" type="password" placeholder="Enter Your Password">                
+                <input type="submit" value="Sign In">
+
+            </form>
+
+        </div>
+
+    </div>
+
+    <script>
+
+    {% if error %}
+
+    document.getElementById("login-info").placeholder = "Inalid Login Details";
+    document.getElementById("login-info").classList.add("error");
+    document.getElementById("login-pass").placeholder = "Inalid Login Details";
+    document.getElementById("login-pass").classList.add("error");
+    document.getElementById("login-info").focus();
+
+    {% endif %}
+
+
+    </script>
+
+{% endblock %}

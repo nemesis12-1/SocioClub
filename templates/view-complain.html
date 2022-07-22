@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+{% load static %}
+{%block titleblock%} SocioClub| Contact Us {% endblock %}
+
+
+{%block cssblock%}
+<link rel="stylesheet" href="{% static 'css/view-complain.css'%}"> {%endblock%}
+
+{% block mainblock %}
+
+<div class="view-complain-container">
+
+    <div class="view-complain-left">
+
+
+
+    </div>
+
+    <div class="table-container">
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Complain Name</th>
+                    <th>Complain Type</th>
+                    <th>Status</th>
+
+                </tr>
+            </thead>
+            <tbody>
+
+                {%if complains%}
+
+                {% for c in complains %}
+                <tr>
+                    <td data-column="Date">{{c.complain_date}}</td>
+                    <td data-column="Complain Name">{{c.complain_name}}</td>
+                    <td data-column="Complain Type">{{c.complain_type}}</td>
+                    <td data-column="Status">{{c.complain_status}}</td>
+                </tr>
+                {% endfor %}
+                
+                {%else%}      
+
+                <td data-column="Date">No Records Found</td>
+                <td data-column="Complain Name">No Records Found</td>
+                <td data-column="Complain Type">No Records Found</td>
+                <td data-column="Status">No Records Found</td>
+
+                
+                {%endif%}
+            </tbody>
+        </table>
+    </div>
+
+    <div class="view-complain-right">
+
+        <div class="view-box">
+            <a href="{% url 'add_complain' %}">Add Complain</a>
+            <a href="{% url 'complain' %}">View Complain</a>
+        </div>
+
+    </div>
+
+
+</div>
+
+
+{% endblock %}

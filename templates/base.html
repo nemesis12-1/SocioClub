@@ -1,0 +1,47 @@
+{% url 'index' as index %}
+{% url 'complain' as complain %}
+{% url 'maintenance' as maintenance %}
+{% url 'contact_us' as contact_us %}
+
+<!DOCTYPE html>
+<html lang="en">
+    {%load static%}
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>{%block titleblock%} Navbar base {%endblock%}</title>
+
+    <link rel="stylesheet" href="{% static 'css/nav.css'%}">
+    {%block cssblock%}  {%endblock%}
+    
+    <link
+    href="https://fonts.googleapis.com/css2?family=Cantarell:wght@700&family=Montserrat:wght@300&family=Oswald:wght@500&family=Source+Code+Pro&display=swap"
+    rel="stylesheet">
+</head>
+<body>
+    <nav>
+        <div class="left" onclick="admin()">
+            <!-- LOGO -->
+            <img src="{% static 'images/logo1.png' %}" alt="LOGO">
+        </div>
+        <div class="right">
+            <a href="{% url 'index' %}" class="{% if request.path == index %} active {%endif%}">Home</a>
+            <a href="{% url 'complain' %}" class="{% if request.path == complain %} active {%endif%}">Complain</a>
+            <a href="#">Event</a>
+            <a href="{% url 'maintenance' %}" class="{% if request.path == maintenance %} active {%endif%}">Maintenance</a>
+            <a href="{% url 'contact_us' %}" class="{% if request.path == contact_us %} active {%endif%}">Contact Us</a>
+        </div>
+    </nav>
+
+    {%block mainblock%}
+    {%endblock%}
+
+    <script>
+
+
+    </script>
+
+</body>
+</html>

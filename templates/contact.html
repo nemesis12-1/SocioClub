@@ -1,0 +1,155 @@
+{% extends "base.html" %}
+{% load static %}
+{%block titleblock%} SocioClub| Contact Us {% endblock %}
+
+
+{%block cssblock%}
+<link rel="stylesheet" href="{% static 'css/contact.css'%}"> {%endblock%}
+
+{% block mainblock %}
+<!-- <img class="black" src="{% static 'images/black.jpg' %}" alt=""> -->
+<div class="header">
+
+    <!--Content before waves-->
+    <div class="inner-header flex">
+
+        <div class="card">
+            <h4>WHO WE ARE </h4>
+            <p>
+                Socioclub is a Professional Soceity management Platform. Here we will provide you only interesting
+                content, which you will like very much. We're dedicated to providing you the best of Soceity management,
+                with a focus on dependability and maintenance events . We're working to turn our passion for Soceity
+                management into a booming online website. We hope you enjoy our Soceity management as much as we enjoy
+                offering them to you.
+
+                
+                love.
+            </p>
+            <h3 class="cardh3">Thanks For Visiting Our Site</h3>
+
+        </div>
+    </div>
+
+    <!--Waves Container-->
+    <div>
+        <svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+            viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
+            <defs>
+                <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+            </defs>
+            <g class="parallax">
+                <use xlink:href="#gentle-wave" x="48" y="0" fill="rgba(255,255,255,0.7" />
+                <use xlink:href="#gentle-wave" x="48" y="3" fill="rgba(255,255,255,0.5)" />
+                <use xlink:href="#gentle-wave" x="48" y="5" fill="rgba(255,255,255,0.3)" />
+                <use xlink:href="#gentle-wave" x="48" y="7" fill="#fff" />
+            </g>
+        </svg>
+    </div>
+    <!--Waves end-->
+
+</div>
+<!-- <img src="{% static 'images/Building-rafiki.png' %}" alt=""> -->
+
+
+
+<div class="contact-container">
+
+    <div class="contact-left">
+        <h2>Contact Us</h2>
+        <p>We Would love to here from you</p>
+        <div class="form-container">
+            <form >
+                <!-- {% csrf_token %}
+                {% if success %}
+                <h3>Thanks for the Feedback</h3>
+                {% else %} -->
+
+                <div class="inputs">
+                    <input type="text" class="input-row" 
+                    name="contact_name" placeholder="Subject">
+                    <textarea id="subject" class="input-row"
+                    name="contact_description" 
+                    placeholder="Description" name="subject"
+                        placeholder="Write something.." required></textarea>
+                </div>
+
+                <input type="submit" value="Send Message">
+                <!-- {% endif %} -->
+            </form>
+        </div>
+
+    </div>
+
+    <div class="contact-right">
+        <div class="contact-right-r">
+
+            <div class="cards">
+
+                <div class="info-container">
+
+                    <div class="info-img">
+                        <img src="{% static 'images/ashu-avatar.png' %}" alt="">
+
+                    </div>
+
+                    <div class="info-icon">
+                        <a href="https://github.com/nemesis12-1" target="_blank"> <img class="icon" src="{% static 'images/github.png' %}" alt=""> </a>
+                        <a href="#"> <img class="icon" src="{% static 'images/gmail.png' %}" alt=""></a>
+                        <a href="#"> <img class="icon" src="{% static 'images/instagram.png ' %}" alt=""></a>
+                    </div>
+
+                </div>
+
+                <div class="text-container">
+                    <h4>Ashutoh Sahu</h4>
+                    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Officia suscipit dolor cupiditate. Sed
+                        soluta </p>
+
+                </div>
+
+
+
+            </div>
+            <div class="cards">
+
+                <div class="info-container">
+
+                    <div class="info-img">
+                        <img src="{% static 'images/mihir-avatar.png' %}" alt="Mihir ~ Creator">
+                    </div>
+
+                    <div class="info-icon">
+
+                        <a href="https://github.com/RadiiSol" target="_blank"> <img class="icon" src="{% static 'images/github.png' %}" alt=""> </a>
+                        <a href="#"> <img class="icon" src="{% static 'images/gmail.png' %}" alt=""></a>
+                        <a href="#"> <img class="icon" src="{% static 'images/instagram.png ' %}" alt=""></a>
+
+                    </div>
+
+                </div>
+
+                <div class="text-container">
+                    <h4>Mihir Gujarathi</h4>
+                    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Officia suscipit dolor cupiditate. Sed
+                        soluta </p>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+
+
+</div>
+
+
+</div>
+
+
+
+</div>
+
+
+{% endblock %}
