@@ -35,7 +35,11 @@ class Maintenance(models.Model):
 
 # MY code goes here
 
-# class Contact(models.Model):
-#       contact_name = models.CharField(max_length=30 , null= False , default='deafault')
-#       contact_description = models.CharField(max_length=200 , null= False , default='deafault')
+class Contact(models.Model):
+      contact_user = models.ForeignKey(User, on_delete=models.CASCADE)
+      contact_subject = models.CharField(max_length=30 , null= False , default='deafault')
+      contact_description = models.CharField(max_length=200 , null= False , default='deafault')
+
+      def __str__(self):
+        return str(self.contact_user) + ' ' + str(self.contact_subject) + ' ' + str(self.contact_description)
     

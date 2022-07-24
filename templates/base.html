@@ -2,6 +2,7 @@
 {% url 'complain' as complain %}
 {% url 'maintenance' as maintenance %}
 {% url 'contact_us' as contact_us %}
+{% url 'event' as event %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -29,7 +30,7 @@
         <div class="right">
             <a href="{% url 'index' %}" class="{% if request.path == index %} active {%endif%}">Home</a>
             <a href="{% url 'complain' %}" class="{% if request.path == complain %} active {%endif%}">Complain</a>
-            <a href="#">Event</a>
+            <a href="{% url 'event' %}" class="{% if request.path == event %} active {%endif%}">Event</a>
             <a href="{% url 'maintenance' %}" class="{% if request.path == maintenance %} active {%endif%}">Maintenance</a>
             <a href="{% url 'contact_us' %}" class="{% if request.path == contact_us %} active {%endif%}">Contact Us</a>
         </div>

@@ -3,12 +3,16 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.contrib import auth
 from django.contrib.auth import authenticate, login, logout
-
-from user_data.models import Ex_user, Complain 
+from user_data.models import Ex_user, Complain , Contact 
 from datetime import date
 
 
 def index(request):
+    # ext_user = Ex_user.objects.get(user=request.user)
+    # user_firstname = ext_user.firstname
+    if request.user.is_authenticated:
+        user_firstname = Ex_user.objects.get(user=request.user).firstname
+        return render(request, "index.html", {'user_firstname':user_firstname})
     return render(request, "index.html")
 
 
@@ -106,18 +110,19 @@ def log_out(request):
     return redirect('index')
 
 def contact_us(request):
-    # if request.method == "POST":
-    #      contact_name = request.POST['complain_name']
-    #      contact_description = request.POST['complain_name']
+    if request.method == "POST":
+         contact_subject = request.POST['contact_subject']
+         contact_description = request.POST['contact_description']
 
 
-    #      contact = Contact(
-    #         contact_name = contact_name,
-    #         contact_description = contact_description,
-    #      )
+         contact = Contact(
+            contact_user = request.user,
+            contact_subject = contact_subject,
+            contact_description = contact_description,
+         )
 
-    #      contact.save
-    #      return render(request, "contact.html" , {'success': True})
+         contact.save()
+         return render(request, "contact.html" , {'success': True})
 
     return render(request, "contact.html")
 
@@ -153,6 +158,9 @@ def add_complain(request):
 
 def maintenance(request):
     return render(request, "maintenance.html")
+
+def event(request):
+    return render(request, "event.html")
 
 
 def test(request):

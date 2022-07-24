@@ -58,20 +58,20 @@
         <h2>Contact Us</h2>
         <p>We Would love to here from you</p>
         <div class="form-container">
-            <form>
-                <!-- {% csrf_token %}
+            <form method="POST" action = "{% url 'contact_us' %}">
+                {% csrf_token %}
                 {% if success %}
                 <h3>Thanks for the Feedback</h3>
-                {% else %} -->
+                {% else %}
 
                 <div class="inputs">
-                    <input type="text" class="input-row" name="contact_name" placeholder="Subject">
+                    <input type="text" class="input-row" name="contact_subject" placeholder="Subject">
                     <textarea id="subject" class="input-row" name="contact_description" placeholder="Description"
                         name="subject" placeholder="Write something.." required></textarea>
                 </div>
 
                 <input type="submit" value="Send Message">
-                <!-- {% endif %} -->
+                {% endif %}
             </form>
         </div>
 

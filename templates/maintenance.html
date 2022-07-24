@@ -3,92 +3,78 @@
 {%block titleblock%} SocioClub | Maintenance {% endblock %}
 
 
-{%block cssblock%} <link rel="stylesheet" href="{% static 'css/maintenance.css'%}"> {%endblock%}
+{%block cssblock%}
+<link rel="stylesheet" href="{% static 'css/maintenance.css'%}"> {%endblock%}
 
 {% block mainblock %}
 
 
-    <!-- hme price add krna he like water ,  electicity , maintenanance bus show krna he *** star use krke  -->
-    <div class="maintenance-container">
+<!-- hme price add krna he like water ,  electicity , maintenanance bus show krna he *** star use krke  -->
+<div class="maintenance-container">
 
-        <div class="mt-left">
-            <h3>Society Name </h3>
-            <table>
-                <tr>
-                    <th>Date</th>
-                    <th>wing/flat No.</th>
-                    <th>Amount</th>
-                </tr>
-                <tr>
-                    <td>option1</td>
-                    <td>option1</td>
-                    <td>option1</td>
-                </tr>
-                <tr>
-                    <td>option2</td>
-                    <td>option2</td>
-                    <td>option2</td>
-                </tr>
-                <tr>
-                    <td>option3</td>
-                    <td>option3</td>
-                    <td>option3</td>
-                </tr>
+    <div class="mt-left">
+        <h3>Society Name </h3>
+        <hr>
+        <table>
+            <tr>
+                <th>Date</th>
+                <th>Flat No./Wing </th>
+                <th>Flat Status</th>
+                <th>Amount</th>
+                <th>Payment Status</th>
+            </tr>
+            <tr>
+                <td>option1</td>
+                <td>option1</td>
+                <td>option1</td>
+                <td>option1</td>
+                <td>option1</td>
+            </tr>
+
+        </table>
+
+        <!-- <p class="normal-text">
+
+            Payment Stucture <br>
+            *Water : 200 ruppes <br>
+            *Electricity : 400 rupees <br>
+            *Maintenance : 1000 rupees <br>
+            *Total : 1600 exclude CGST <br>
+        </p> -->
 
 
-            </table>
-            <blockquote >
-                <p class="normal-text">
+    </div>
 
-                    Payment Stucture <br>
-                    *Water : 200 ruppes <br>
-                    *Electricity : 400 rupees <br>
-                    *Maintenance : 1000 rupees <br>
-                    *Total : 1600 exclude CGST <br>
-
-            </blockquote>
-
-            </p>
-
+    <div class="mt-right">
+        <div class="mt-right-text">
+            <p>** If the Maintenance Amount is already paid , and it's not showing in the history table kindly request to
+                the secratory by submitting the below form. **</p>
+            <h5>Thanks for the Consideration</h5>
 
         </div>
 
-        <div class="mt-right">
+        <div class="mt-right-form">
             <form action="">
 
-                <!-- <div class="row"> -->
                 <label>Date</label>
                 <input type="date">
-                <!-- </div> -->
 
-                <!-- <div class="row"> -->
-
-                <label>Society Name</label>
+                <label>Flat Status</label>
                 <select>
-                    <option value="">Society 1</option>
-                    <option value="">Soceity 2</option>
-                    <option value="">Soceity 3</option>
-                    <option value="">Soceity 4</option>
+                    <option value="">Owner</option>
+                    <option value="">Tenant</option>
                 </select>
 
-                <!-- </div> -->
-
-                <!-- <div class="row"> -->
-
-                <label>Wing and Flat Number</label>
-                <input type="text">
-
-                <!-- </div> -->
-
-                <!-- <div class="row"> -->
                 <label>Amount</label>
                 <input type="text">
-                <!-- </div> -->
-                <input type="submit" value="PAY">
+
+                <input type="submit" value="Request">
 
 
             </form>
-        </div>
 
+        </div>
     </div>
+
+</div>
 {% endblock %}
