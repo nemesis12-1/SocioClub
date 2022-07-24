@@ -17,7 +17,7 @@
     </div>
 
 
-    <form method="POST" action="{% url 'complain' %}"class="complain-form-container">
+    <form method="POST" action="{% url 'add_complain' %}"class="complain-form-container">
         {% csrf_token %}
 
         {% if success %}

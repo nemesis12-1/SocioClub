@@ -15,11 +15,10 @@ body {
     background-image: url("../images/event-bg-4.jpg");
     background-size: cover;
     background-repeat: no-repeat;
+    overflow: hidden;
     /* background-position: bottom; */
     /* background-color: lightcoral; */
     display: flex;
-    height: calc(100vh - 8vw);
-    width: 100vw;
     flex: 1;
 }
 

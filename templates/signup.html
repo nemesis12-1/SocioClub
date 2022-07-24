@@ -68,10 +68,9 @@
                 <label>Society Name</label>
                 <select name="society_name" required id="society_name">
                     <option value="" disabled selected hidden>- Select Your Society -</option>
-                    <option value="Society 1">Society 1</option>
-                    <option value="Society 2">Society 2</option>
-                    <option value="Society 3">Society 3</option>
-                    <option value="Society 4">Society 4</option>
+                    {% for s in society_data %}
+                    <option value="{{s.society_name}}">{{s.society_name}}</option>
+                    {% endfor %}
                 </select>
                 <div class="tandc">
                     <input type="radio" name="tc" required><span>

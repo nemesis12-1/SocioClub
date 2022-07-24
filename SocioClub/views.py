@@ -3,16 +3,16 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.contrib import auth
 from django.contrib.auth import authenticate, login, logout
-from user_data.models import Ex_user, Complain , Contact 
+from user_data.models import Maintenance, Society, User_Detail, Complain, Contact
 from datetime import date
+from django.contrib.auth.decorators import login_required
 
 
 def index(request):
-    # ext_user = Ex_user.objects.get(user=request.user)
-    # user_firstname = ext_user.firstname
+
     if request.user.is_authenticated:
-        user_firstname = Ex_user.objects.get(user=request.user).firstname
-        return render(request, "index.html", {'user_firstname':user_firstname})
+        user_firstname = User.objects.get(username=request.user).first_name
+        return render(request, "index.html", {'user_firstname': user_firstname})
     return render(request, "index.html")
 
 
@@ -27,45 +27,35 @@ def login(request):
                 user_detail = User.objects.filter(email=email)
                 username = user_detail[0].username
             else:
-                 
-                #  list = array
-                #  abc = [1,"mihir",2,3]
+                return render(request, 'login.html', {'error': 'Record not Valid'})
 
-                # dict
-                # dict = {'key': 'value', 'key2': 'value'}
-                # error = {'Records not valid'}
-
-                return render(request, 'login.html' , {'error': 'Record not Valid'})
-
-                
         elif info.isnumeric():
             phone = info
-            if Ex_user.objects.filter(phone=phone).exists():
-                user_detail = Ex_user.objects.filter(phone=phone)
-                username = user_detail[0].user.username 
+            if User_Detail.objects.filter(phone=phone).exists():
+                user_detail = User_Detail.objects.filter(phone=phone)
+                username = user_detail[0].user.username
             else:
-                return render(request, 'login.html' , {'error': 'Record not Valid'})
+                return render(request, 'login.html', {'error': 'Record not Valid'})
         else:
             username = info
-
 
         user = authenticate(request, username=username, password=password)
         if user is not None:
             auth.login(request, user)
             return redirect('index')
         else:
-            return render(request, 'login.html' , {'error': 'Record not Valid'})
+            return render(request, 'login.html', {'error': 'Record not Valid'})
 
     return render(request, "login.html")
 
 
 def signup(request):
+    society_data = Society.objects.all()
     if request.method == "POST":
         name = request.POST['name']
         username = request.POST['username']
         email = request.POST['email']
         pass1 = request.POST['pass1']
-        pass2 = request.POST['pass2']
         phone = request.POST['phone']
         flat = request.POST['flatno']
         society_name = request.POST['society_name']
@@ -76,65 +66,84 @@ def signup(request):
         lastname = fullname.split()[-1]
 
         context = {
-            'name' : name,
+            'name': name,
             'username': username,
-            'email' : email ,
-            'pass1' : pass1,
-            'phone' : phone,
-            'flat' : flat,
-            'society_name' : society_name,
+            'email': email,
+            'pass1': pass1,
+            'phone': phone,
+            'flat': flat,
+            'society_name': society_name,
         }
 
         try:
             user = User.objects.get(username=username)
-            return render(request, 'signup.html', {'error': 'Username exists', 'context': context})
+            return render(request, 'signup.html', {'error': 'Username exists', 'context': context, 'society_data': society_data})
         except User.DoesNotExist:
             if User.objects.filter(email=email).exists():
-                return render(request, 'signup.html', {'error': 'Email exists', 'context': context})
+                return render(request, 'signup.html', {'error': 'Email exists', 'context': context, 'society_data': society_data})
 
             user = User.objects.create_user(
-                username=username, password=pass1, email=email)
-            newextendeduser = Ex_user(
-                firstname=firstname, lastname=lastname, phone=phone, flat=flat, society_name=society_name, user=user)
+                username=username, password=pass1, email=email, first_name=firstname, last_name=lastname)
+
+            society = Society.objects.get(society_name=society_name) # because One to Many Relation we have to fetch object
+
+            newextendeduser = User_Detail(
+                user=user, phone=phone, flat=flat, society_name=society)
             newextendeduser.save()
 
-            auth_user = authenticate(request, username=username, password=pass1)
+            auth_user = authenticate(
+                request, username=username, password=pass1)
             auth.login(request, auth_user)
 
             return render(request, "signup.html", {'success': 'Successfully Created Account'})
 
-    return render(request, "signup.html")
+    return render(request, "signup.html", {'society_data': society_data})
+
 
 def log_out(request):
     logout(request)
     return redirect('index')
 
+
 def contact_us(request):
     if request.method == "POST":
-         contact_subject = request.POST['contact_subject']
-         contact_description = request.POST['contact_description']
+        contact_subject = request.POST['contact_subject']
+        contact_description = request.POST['contact_description']
 
+        contact = Contact(
+            contact_user=request.user,
+            contact_subject=contact_subject,
+            contact_description=contact_description,
+        )
 
-         contact = Contact(
-            contact_user = request.user,
-            contact_subject = contact_subject,
-            contact_description = contact_description,
-         )
-
-         contact.save()
-         return render(request, "contact.html" , {'success': True})
+        contact.save()
+        return render(request, "contact.html", {'success': True})
 
     return render(request, "contact.html")
 
 
+@login_required(login_url='login')
 def complain_view(request):
     complains = Complain.objects.filter(complain_user=request.user)
     return render(request, "view-complain.html", {'complains': complains})
 
 
+@login_required(login_url='login')
 def add_complain(request):
     if request.method == "POST":
-        complain_name = request.POST['complain_name']
+        print("")
+        print("")
+        print("")
+        print("")
+        print("")
+        print("YOOOOO")
+        print("")
+        print("")
+        print("")
+        print("")
+        print("")
+        print("")
+        complain_title = request.POST['complain_name']
         complain_type = request.POST['complain_type']
         complain_description = request.POST['complain_description']
         complain_solution = request.POST['complain_solution']
@@ -143,7 +152,7 @@ def add_complain(request):
 
         complain = Complain(
             complain_user=request.user,
-            complain_name=complain_name,
+            complain_title=complain_title,
             complain_type=complain_type,
             complain_description=complain_description,
             complain_solution=complain_solution,
@@ -152,13 +161,17 @@ def add_complain(request):
         )
         complain.save()
         return render(request, "complain.html", {'success': True})
-        
+
     return render(request, "complain.html")
 
 
+# @login_required(login_url='login')
 def maintenance(request):
-    return render(request, "maintenance.html")
+    society_name = User_Detail.objects.get(user=request.user).society_name
+    return render(request, "maintenance.html", {'society_name':society_name})
 
+
+# @login_required(login_url='login')
 def event(request):
     return render(request, "event.html")
 
