@@ -48,7 +48,7 @@ class Maintenance(models.Model):
     maintenance_user = models.ForeignKey(User, on_delete=models.CASCADE)
     maintenance_month = models.IntegerField()
     maintenance_year = models.IntegerField()
-    payment_date = models.DateField(null=True)
+    payment_date = models.CharField(null=True, max_length=15)
 
     def __str__(self):
         return str(self.maintenance_user) + ' ' + str(self.maintenance_month) + ' ' + str(self.maintenance_year) + ' ' + str(self.payment_date)

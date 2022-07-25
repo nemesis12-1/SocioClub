@@ -1,3 +1,5 @@
+
+
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
@@ -198,4 +200,21 @@ def test(request):
     return render(request, "test.html")
 
 def secretary(request):
+    if request.method == 'POST':
+
+        a = request.POST['a']
+        b = request.POST['b']
+        c = request.POST['c']
+        d = request.POST.get('d')
+
+        print(a)
+        print(b)
+        print(c)
+        print(d)
+
+        if User_Detail.objects.filter(flat=a).exists():
+            flatno = User_Detail.objects.get(flat=a)
+            print(flatno.user.first_name)
+            print(flatno.user.last_name)
+            # m = Maintenance(maintenance_user = request.user , maintenance_month = b , maintenance_year = c , payment_date = d )
     return render(request, "secretary.html")
