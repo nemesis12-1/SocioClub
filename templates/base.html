@@ -6,22 +6,44 @@
 
 <!DOCTYPE html>
 <html lang="en">
-    {%load static%}
+{%load static%}
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+
     <title>{%block titleblock%} Navbar base {%endblock%}</title>
 
     <link rel="stylesheet" href="{% static 'css/nav.css'%}">
-    {%block cssblock%}  {%endblock%}
-    
+    {%block cssblock%} {%endblock%}
+
     <link
-    href="https://fonts.googleapis.com/css2?family=Cantarell:wght@700&family=Montserrat:wght@300&family=Oswald:wght@500&family=Source+Code+Pro&display=swap"
-    rel="stylesheet">
+        href="https://fonts.googleapis.com/css2?family=Cantarell:wght@700&family=Montserrat:wght@300&family=Oswald:wght@500&family=Source+Code+Pro&display=swap"
+        rel="stylesheet">
 </head>
+
 <body>
+
+
+    <script>
+
+        function admin() {
+            window.open("http://127.0.0.1:8000/admin", "_blank");
+        }
+
+        function openSideNav() {
+            document.getElementById("sideNav").style.right = "0";
+            console.log("Open s");
+        }
+
+        function closeSideNav() {
+            document.getElementById("sideNav").style.right = "-20%";
+            console.log("close s");
+        }
+
+    </script>
+
     <nav>
         <div class="left" onclick="admin()">
             <!-- LOGO -->
@@ -31,21 +53,39 @@
             <a href="{% url 'index' %}" class="{% if request.path == index %} active {%endif%}">Home</a>
             <a href="{% url 'complain' %}" class="{% if request.path == complain %} active {%endif%}">Complain</a>
             <a href="{% url 'event' %}" class="{% if request.path == event %} active {%endif%}">Event</a>
-            <a href="{% url 'maintenance' %}" class="{% if request.path == maintenance %} active {%endif%}">Maintenance</a>
+            <a href="{% url 'maintenance' %}"
+                class="{% if request.path == maintenance %} active {%endif%}">Maintenance</a>
             <a href="{% url 'contact_us' %}" class="{% if request.path == contact_us %} active {%endif%}">Contact Us</a>
+            <div class="user-profile" onclick="openSideNav()">
+                <img src="{% static 'images/user.png' %}" alt="Illustration">
+            </div>
         </div>
     </nav>
+
+    <div id="sideNav">
+        <span onclick="closeSideNav()" class="cross">
+            &chi;
+        </span>
+
+        <div class="user-profile-data">
+            <h6>Name : {{request.user.first_name}} {{request.user.last_name}}</h6>
+            <h6>Username : {{request.user}}</h6>
+            <h6>Email : {{request.user.email}}</h6>
+            <!-- <h6>Phone No. : {{phone}}</h6>
+            <h6>Flat/Wing No. : {{user.flat}}</h6>
+            <h6>Society name: {{user.soceity_name}} </h6> -->
+
+            <div class="btn1">
+                <a href="{% url 'logout' %}">Logout</a>
+            </div>
+        </div>
+
+    </div>
 
     {%block mainblock%}
     {%endblock%}
 
-    <script>
-
-        function admin() {
-            window.open("http://127.0.0.1:8000/admin", "_blank");
-        }
-
-    </script>
 
 </body>
+
 </html>

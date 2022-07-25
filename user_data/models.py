@@ -30,7 +30,7 @@ class Event(models.Model):
     event_end_date = models.DateTimeField()
 
     def __str__(self):
-        return str(self.society_name) + ' ' + str(self.event_name) + ' ' + str(self.event_date)
+        return str(self.event_name) + ' ' + str(self.event_start_date)
 
 class Complain(models.Model):
     complain_user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -48,7 +48,7 @@ class Maintenance(models.Model):
     maintenance_user = models.ForeignKey(User, on_delete=models.CASCADE)
     maintenance_month = models.IntegerField()
     maintenance_year = models.IntegerField()
-    payment_date = models.DateField()
+    payment_date = models.DateField(null=True)
 
     def __str__(self):
         return str(self.maintenance_user) + ' ' + str(self.maintenance_month) + ' ' + str(self.maintenance_year) + ' ' + str(self.payment_date)

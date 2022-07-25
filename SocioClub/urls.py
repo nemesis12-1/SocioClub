@@ -15,5 +15,6 @@ urlpatterns = [
     path('complain/', views.complain_view , name = "complain"),
     path('add_complain/', views.add_complain , name = "add_complain"),
     path('test/', views.test , name = "test"),
+    path('secretary/', views.secretary , name = "secretary"),
     # path('user/', include("user_data.urls")),
 ]

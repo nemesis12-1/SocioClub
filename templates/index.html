@@ -15,7 +15,6 @@
 <div class="box3"></div>
 <div class="box4"></div>
 
-
 <div class="main-box">
     <div class="headline-box">
         <h1>Your necessities are now a click away</h1>
@@ -24,14 +23,14 @@
         {% if user.is_authenticated %}
         <div class="user-auth-btn">
             <!-- <a href="{% url 'logout' %}" class="btn">Welcome {{user.get_username}} </a> -->
-            <a href="{% url 'logout' %}" class="btn">Welcome {{user_firstname}} </a>
+            <a onclick="openSideNav()" class="btn">Welcome {{user_firstname}} </a>
             <a href="{% url 'logout' %}" class="btn">Logout</a>
         </div>
         {% else %}
         <a href="{% url 'login' %}" class="btn">Login</a>
         {% endif %}
-
     </div>
+
     <div class="image-box">
         <img src="{% static 'images/index.png' %}" alt="Illustration">
     </div>

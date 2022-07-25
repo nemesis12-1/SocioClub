@@ -3,8 +3,8 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.contrib import auth
 from django.contrib.auth import authenticate, login, logout
-from user_data.models import Maintenance, Society, User_Detail, Complain, Contact
-from datetime import date
+from user_data.models import Maintenance, Society, User_Detail, Complain, Contact, Event
+from datetime import date, datetime
 from django.contrib.auth.decorators import login_required
 
 
@@ -85,7 +85,8 @@ def signup(request):
             user = User.objects.create_user(
                 username=username, password=pass1, email=email, first_name=firstname, last_name=lastname)
 
-            society = Society.objects.get(society_name=society_name) # because One to Many Relation we have to fetch object
+            # because One to Many Relation we have to fetch object
+            society = Society.objects.get(society_name=society_name)
 
             newextendeduser = User_Detail(
                 user=user, phone=phone, flat=flat, society_name=society)
@@ -168,13 +169,33 @@ def add_complain(request):
 # @login_required(login_url='login')
 def maintenance(request):
     society_name = User_Detail.objects.get(user=request.user).society_name
-    return render(request, "maintenance.html", {'society_name':society_name})
+    return render(request, "maintenance.html", {'society_name': society_name})
 
 
 # @login_required(login_url='login')
 def event(request):
-    return render(request, "event.html")
+    society_name = User_Detail.objects.get(user=request.user).society_name
+    events = Event.objects.filter(society_name = society_name)
+    current_date = datetime.now()
+
+    ongoing_event = {}
+    upcoming_event = {}
+
+    now = current_date.strftime("%d/%m/%Y %H:%M")
+
+    for event in events:
+        start = event.event_start_date.strftime("%d/%m/%Y %H:%M")
+        end = event.event_end_date.strftime("%d/%m/%Y %H:%M")
+        if now >= start and now <=end:
+            ongoing_event[event] = event.event_name
+        elif now<=start:
+            upcoming_event[event] = event.event_name
+
+    return render(request, "event.html", {'ongoing_event': ongoing_event, 'upcoming_event': upcoming_event})
 
 
 def test(request):
     return render(request, "test.html")
+
+def secretary(request):
+    return render(request, "secretary.html")
