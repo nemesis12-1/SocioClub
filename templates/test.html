@@ -4,6 +4,39 @@
 
 {% block mainblock %}
 
-hello
+{% for m in maintenance_data %}
+
+<h3 id="{{m.maintenance_month}}">Month: {{m.maintenance_month}}</h3> 
+<h3 id="{{m.maintenance_year}}">Year: {{m.maintenance_year}}</h3>
+
+{% if m.payment_date == "" %}
+<h3 id="{{m.payment_date}}">Payment Date: Not Paid</h3>
+{% else %}
+<h3 id="{{m.payment_date}}">Payment Date: {{m.payment_date}}</h3>
+{% endif %}
+
+<button onclick="func({{m.maintenance_month}}, {{m.maintenance_year}}, {{m.payment_date}})">Add</button>
+    
+<br><br>
+{% endfor %}
+
+<input id="a" type="text" placeholder="2">
+<input id="b" type="text" placeholder="3">
+<input id="c" type="text" placeholder="1">
+
+<script>
+
+    function func(month, year, date) {
+        a = document.getElementById("a");
+        b = document.getElementById("b");
+        c = document.getElementById("c");
+
+        a.value = month;
+        b.value = year;
+        c.value = date;
+    }
+
+</script>
+
 {% endblock %}
 

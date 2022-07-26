@@ -23,13 +23,22 @@
                 <th>Year</th>
                 <th>Payment Date</th>
             </tr>
+
+            {% for m in maintenance_data %}
             <tr>
+                <td>{{flat}}</td>
                 <td>option1</td>
-                <td>option1</td>
-                <td>option1</td>
-                <td>option1</td>
-                <td>option1</td>
+                <td>{{m.maintenance_month}}</td>
+                <td>{{m.maintenance_year}}</td>
+
+                {% if m.payment_date == "" %}
+                    <td>Not Paid</td>
+                {% else %}
+                    <td>{{m.payment_date}}</td>
+                {% endif %}
+
             </tr>
+            {% endfor %}
 
         </table>
 
@@ -77,4 +86,9 @@
     </div>
 
 </div>
+
+<script>
+    console.log("{{flat}}")
+</script>
+
 {% endblock %}

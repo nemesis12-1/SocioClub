@@ -18,6 +18,7 @@ body {
     height: calc(100vh - 8vw);
     width: 100vw;
     flex: 1;
+    
 }
 
 .mt-left {
@@ -147,6 +148,7 @@ input[type=text] {
     padding: 20px;
     font-weight: bolder;
     font-size: 40px;
+    text-align: center;
 
 
 }

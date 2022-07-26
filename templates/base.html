@@ -76,8 +76,12 @@
             <h6>Society name: {{user.soceity_name}} </h6> -->
 
             <div class="btn1">
-                <a href="{% url 'logout' %}">Logout</a>
+                <a href="{% url 'secretary' %}" target="_blank">sec main</a>
             </div>
+            
+            <a href="{% url 'sec_complain' %}" target="_blank">sec complain</a><br>
+            <a href="{% url 'sec_event' %}" target="_blank">sec event</a><br>
+           
         </div>
 
     </div>

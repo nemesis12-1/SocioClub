@@ -134,18 +134,6 @@ def complain_view(request):
 @login_required(login_url='login')
 def add_complain(request):
     if request.method == "POST":
-        print("")
-        print("")
-        print("")
-        print("")
-        print("")
-        print("YOOOOO")
-        print("")
-        print("")
-        print("")
-        print("")
-        print("")
-        print("")
         complain_title = request.POST['complain_name']
         complain_type = request.POST['complain_type']
         complain_description = request.POST['complain_description']
@@ -170,8 +158,28 @@ def add_complain(request):
 
 # @login_required(login_url='login')
 def maintenance(request):
+    maintenance_data = Maintenance.objects.filter(maintenance_user = request.user).order_by('-maintenance_month')
+    
     society_name = User_Detail.objects.get(user=request.user).society_name
-    return render(request, "maintenance.html", {'society_name': society_name})
+    flat = User_Detail.objects.get(user = request.user).flat
+
+    print("")
+    print(maintenance_data)
+    print("")
+
+    for m in maintenance_data:
+        print("")
+        print("Month: ")
+        print(m.maintenance_month)
+        print("")
+        print("Payment: ")
+        if m.payment_date == "":
+            print("No value")
+        else:
+            print(m.payment_date)
+        print("")
+
+    return render(request, "maintenance.html", {'society_name': society_name, 'maintenance_data': maintenance_data, 'flat': flat})
 
 
 # @login_required(login_url='login')
@@ -197,7 +205,8 @@ def event(request):
 
 
 def test(request):
-    return render(request, "test.html")
+    maintenance_data = Maintenance.objects.filter(maintenance_user = request.user).order_by('-maintenance_month')
+    return render(request, "test.html", {'maintenance_data': maintenance_data})
 
 def secretary(request):
     if request.method == 'POST':
@@ -207,14 +216,18 @@ def secretary(request):
         c = request.POST['c']
         d = request.POST.get('d')
 
-        print(a)
-        print(b)
-        print(c)
-        print(d)
-
         if User_Detail.objects.filter(flat=a).exists():
             flatno = User_Detail.objects.get(flat=a)
-            print(flatno.user.first_name)
-            print(flatno.user.last_name)
-            # m = Maintenance(maintenance_user = request.user , maintenance_month = b , maintenance_year = c , payment_date = d )
+            m = Maintenance(maintenance_user = flatno.user , maintenance_month = b , maintenance_year = c , payment_date = d )
+            m.save()
+        else:
+            return redirect('index')
     return render(request, "secretary.html")
+
+
+def sec_complain(request):
+        return render (request , "sec-complain.html")
+
+
+def sec_event(request):
+        return render (request , "sec-event.html")
