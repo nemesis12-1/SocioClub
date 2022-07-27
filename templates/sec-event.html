@@ -15,17 +15,18 @@
     <div class="sec-left">
         <h3>Secretary Event</h3>
         <hr>
-        <table>
-            <tr>
-                <th>Name</th>
-                <th>Description</th>
-                <th>Start Date</th>
-                <th>End Date</th>
-                <!-- <th>Payment Date</th> -->
-                <th></th>
-            </tr>
-
-            <!-- {% for m in maintenance_data %}
+        <div class="only-table-main">
+            <table>
+                <thead>
+                    <tr>
+                        <th class="name">Name</th>
+                        <th class="desc">Description</th>
+                        <th class="date">Start Date</th>
+                        <th class="date">End Date</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <!-- {% for m in maintenance_data %}
             <tr>
                 <td>{{flat}}</td>
                 <td>option1</td>
@@ -41,20 +42,22 @@
             </tr>
 
             {% endfor %} -->
+                <tbody>
+                    {% for e in events %}
+                    <tr>
+                        <td class="name">{{e.event_name}}</td>
+                        <td class="desc">{{e.event_description}}</td>
+                        <td class="date">{{e.event_start_date}}</td>
+                        <td class="date">{{e.event_end_date}}</td>
+                        <td> <button class="select-btn">Select</button></td>
+                    </tr>
+                    {% endfor %}
 
-            <tr>
-                <td>option</td>
-                <td>option</td>
-                <td>option</td>
-                <td>option</td>
-                <!-- <td>option</td> -->
-                <td> <button class="select-btn">Select</button></td>
-            </tr>
+                </tbody>
 
 
-
-        </table>
-
+            </table>
+        </div>
     </div>
 
     <div class="sec-right">
@@ -66,21 +69,19 @@
         </div>
 
         <div class="sec-right-form">
-            <form action="">
+            <form method="POST" action="{% url 'sec_event' %}">
 
+                {% csrf_token %}
                 <label>Name</label>
-                <input type="text">
+                <input type="text" name="event_name" maxlength="100">
                 <label>Description</label>
-                <!-- <input type="text">  -->
-                <textarea id="details" name="event_secretary_description" rows="10" placeholder="Write something.."
-                    required></textarea>
+
+                <textarea id="details" name="event_description" rows="10" placeholder="Write something.." maxlength="500" required></textarea>
 
                 <label>Start Date</label>
-                <input type="text">
+                <input type="datetime-local" name="event_start_date">
                 <label>End Date</label>
-                <input type="text">
-                <!-- <label>Payment Date</label>
-                <input type="text"> -->
+                <input type="datetime-local" name="event_end_date">
 
                 <input type="submit" value="Add">
 
@@ -95,7 +96,7 @@
 <!-- <h1>
     Events
 </h1>
-<form method="POST" action="{% url 'secretary'%}">
+<form method="POST" >
     {% csrf_token %}
 
     <input type="text" placeholder="Name" name="event-name">
@@ -106,13 +107,17 @@
 </form>
 
 <h1>Complain</h1>
-<form method="POST" action="{% url 'secretary'%}">
+<form method="POST">
     {% csrf_token %}
 
     <input type="text" placeholder="Status" name="complain-status">
     
     <input type="submit">
 </form> -->
+
+<script>
+    console.log("{{events}}")
+</script>
 
 
 

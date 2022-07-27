@@ -10,58 +10,58 @@
 
 <div class="view-complain-container">
 
-    <div class="view-complain-left">
 
-
-
-    </div>
 
     <div class="table-container">
 
-        <table>
-            <thead>
-                <tr>
-                    <th>Date</th>
-                    <th>Complain Name</th>
-                    <th>Complain Type</th>
-                    <th>Status</th>
+        <div class="only-table">
 
-                </tr>
-            </thead>
-            <tbody>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Complain Name</th>
+                        <th>Complain Type</th>
+                        <th>Status</th>
 
-                {%if complains%}
+                    </tr>
+                </thead>
+                <tbody>
 
-                {% for c in complains %}
-                <tr>
-                    <td data-column="Date">{{c.complain_date}}</td>
-                    <td data-column="Complain Name">{{c.complain_title}}</td>
-                    <td data-column="Complain Type">{{c.complain_type}}</td>
-                    <td data-column="Status">{{c.complain_status}}</td>
-                </tr>
-                {% endfor %}
-                
-                {%else%}      
+                    {%if complains%}
 
-                <td data-column="Date">No Records Found</td>
-                <td data-column="Complain Name">No Records Found</td>
-                <td data-column="Complain Type">No Records Found</td>
-                <td data-column="Status">No Records Found</td>
+                    {% for c in complains %}
+                    <tr>
+                        <td data-column="Date">{{c.complain_date}}</td>
+                        <td data-column="Complain Name">{{c.complain_title}}</td>
+                        <td data-column="Complain Type">{{c.complain_type}}</td>
+                        <td data-column="Status">{{c.complain_status}}</td>
+                    </tr>
+                    {% endfor %}
 
-                
-                {%endif%}
-            </tbody>
-        </table>
-    </div>
+                    {%else%}
 
-    <div class="view-complain-right">
+                    <td data-column="Date">No Records Found</td>
+                    <td data-column="Complain Name">No Records Found</td>
+                    <td data-column="Complain Type">No Records Found</td>
+                    <td data-column="Status">No Records Found</td>
 
-        <div class="view-box">
-            <a href="{% url 'add_complain' %}">Add Complain</a>
-            <a href="{% url 'complain' %}">View Complain</a>
+
+                    {%endif%}
+                </tbody>
+            </table>
         </div>
 
     </div>
+
+
+
+    <div class="view-box">
+        <a href="{% url 'add_complain' %}">Add Complain</a>
+        <a href="{% url 'complain' %}">View Complain</a>
+    </div>
+
+
 
 
 </div>

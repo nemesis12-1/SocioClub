@@ -171,6 +171,8 @@ select {
     border-radius: 4px;
     margin: 6px 0px;
     padding: 8px 1px;
+    color: white;
+    font-size: 1rem;
 }
 
 

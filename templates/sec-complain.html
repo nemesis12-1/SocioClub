@@ -15,17 +15,23 @@
     <div class="sec-left">
         <h3>Secretary Complain</h3>
         <hr>
-        <table>
-            <tr>
-                <th>Date</th>
-                <th>Complain Name </th>
-                <th>Complain Type</th>
-                <th>Status</th>
-                <!-- <th>Payment Date</th> -->
-                <th></th>
-            </tr>
+        <div class="only-table-main">
 
-            <!-- {% for m in maintenance_data %}
+            <table>
+
+                <thead>
+
+                    <tr>
+                        <th>Date</th>
+                        <th>Complain Name </th>
+                        <th>Complain Type</th>
+                        <th>Status</th>
+                        <!-- <th>Payment Date</th> -->
+                        <th></th>
+                    </tr>
+                    
+                </thead>
+                <!-- {% for m in maintenance_data %}
             <tr>
                 <td>{{flat}}</td>
                 <td>option1</td>
@@ -41,20 +47,23 @@
             </tr>
 
             {% endfor %} -->
+            <tbody>
 
-            <tr>
-                <td>option</td>
-                <td>option</td>
-                <td>option</td>
-                <td>option</td>
-                <!-- <td>option</td> -->
-                <td> <button class="select-btn">Select</button></td>
-            </tr>
-           
-           
-            
-        </table>
+                  <tr>
+                      <td>option</td>
+                      <td>option</td>
+                    <td>option</td>
+                    <td>option</td>
+                    <!-- <td>option</td> -->
+                    <td> <button class="select-btn">Select</button></td>
+                </tr>
+                
+            </tbody>
 
+
+            </table>
+
+        </div>
     </div>
 
     <div class="sec-right">
@@ -71,7 +80,7 @@
                 <label>Date</label>
                 <input type="text">
                 <label>Complain Name</label>
-                <input type="text"> 
+                <input type="text">
                 <label>Complain Type</label>
                 <input type="text">
                 <label>Status</label>
@@ -92,7 +101,7 @@
 <!-- <h1>
     Events
 </h1>
-<form method="POST" action="{% url 'secretary'%}">
+<form method="POST" ">
     {% csrf_token %}
 
     <input type="text" placeholder="Name" name="event-name">
@@ -103,7 +112,7 @@
 </form>
 
 <h1>Complain</h1>
-<form method="POST" action="{% url 'secretary'%}">
+<form method="POST" %}">
     {% csrf_token %}
 
     <input type="text" placeholder="Status" name="complain-status">

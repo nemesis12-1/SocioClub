@@ -99,19 +99,37 @@ h4 {
 .event-card-content {
 
     width: 100%;
+    height: 15rem;
     /* background-color: #309f83; */
 }
 
 
 table {
     width: 100%;
+    height:15rem ;
+    /* height: 30%; */
     /* background-color: yellow; */
     border-collapse: collapse;
-    /* border-bottom-left-radius:  1rem;
-    border-bottom-right-radius: 1rem; */
-    /* background-color: blue; */
+  
 }
 
+tbody{
+    /* max-height: 30rem; */
+    width: 100%;
+}
+
+.only-table-main{
+    overflow-y: scroll;
+    height: 15rem;
+    width: 100%;
+
+}
+thead th{
+    z-index: 2;
+    position: sticky;
+    top: 0;
+    background-color: white;
+}
 th {
     border-bottom: 1px solid black;
     /* width: 20%; */
@@ -136,7 +154,8 @@ td {
     width: 20%;
 }
 .th-2{
-    width: 50%;
+    max-width: 20rem;
+    word-wrap: break-word;
 }
 .th-3 , .th-4{
     width: 15%;

@@ -30,25 +30,34 @@
             </div>
             <div class="event-card-content">
 
-                <table>
-                    <tr>
-                        <th class="th-1">Name</th>
-                        <th class="th-2">Content</th>
-                        <th class="th-3">Start Date</th>
-                        <th class="th-4">End Date</th>
-                    </tr>
+                <div class="only-table-main">
 
-                    {% for event in ongoing_event %}
-                    <tr>
-                        <td>{{event.event_name}}</td>
-                        <td>{{event.event_description}}</td>
-                        <td>{{event.event_start_date}}</td>
-                        <td>{{event.event_end_date}}</td>
-                    </tr>
-                    {% endfor %}
+                    <table>
+                        <thead>
 
-                </table>
+                            <tr>
+                                <th class="th-1">Name</th>
+                                <th class="th-2">Description</th>
+                                <th class="th-3">Start Date</th>
+                                <th class="th-4">End Date</th>
+                            </tr>
 
+                        </thead>
+                        {% for event in ongoing_event %}
+
+                        <tbody>
+
+                            <tr>
+                                <td>{{event.event_name}}</td>
+                                <td class="th-2">{{event.event_description}}</td>
+                                <td>{{event.event_start_date}}</td>
+                                <td>{{event.event_end_date}}</td>
+                            </tr>
+                        </tbody>
+                        {% endfor %}
+
+                    </table>
+                </div>
             </div>
 
         </div>
@@ -70,24 +79,32 @@
             </div>
             <div class="event-card-content">
 
-                <table>
-                    <tr>
-                        <th class="th-1">Name</th>
-                        <th class="th-2">Content</th>
-                        <th class="th-3">Start Date</th>
-                        <th class="th-4">End Date</th>
-                    </tr>
+                <div class="only-table-main">
 
-                    {% for event in upcoming_event %}
-                    <tr>
-                        <td>{{event.event_name}}</td>
-                        <td>{{event.event_description}}</td>
-                        <td>{{event.event_start_date}}</td>
-                        <td>{{event.event_end_date}}</td>
-                    </tr>
-                    {% endfor %}
-                </table>
+                    <table>
+                        <thead>
 
+                            <tr>
+                                <th class="th-1">Name</th>
+                                <th class="th-2">Content</th>
+                                <th class="th-3">Start Date</th>
+                                <th class="th-4">End Date</th>
+                            </tr>
+                        </thead>
+
+                        {% for event in upcoming_event %}
+                        <tbody>
+
+                            <tr>
+                                <td>{{event.event_name}}</td>
+                                <td class="th-2">{{event.event_description}}</td>
+                                <td>{{event.event_start_date}}</td>
+                                <td>{{event.event_end_date}}</td>
+                            </tr>
+                        </tbody>
+                        {% endfor %}
+                    </table>
+                </div>
             </div>
 
         </div>

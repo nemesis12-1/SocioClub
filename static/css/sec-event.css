@@ -92,7 +92,7 @@ body {
 
 
 
-.sec-right .sec-right-form form input[type=date],
+.sec-right .sec-right-form form input[type=datetime-local],
 input[type=text] {
     background-color: rgba(255, 255, 255, 0.07);
     border: 1px solid #ccc;
@@ -155,13 +155,24 @@ input[type=text] {
 }
 
 table {
-    margin-top: 10px;
+    /* margin-top: 10px; */
     border-collapse: collapse;
     width: 100%;
     font-family: 'Montserrat', sans-serif;
 
 }
+.only-table-main{
+    overflow-y: scroll;
+    height: 80%;
+    width: 100%;
 
+}
+thead th{
+    z-index: 2;
+    position: sticky;
+    top: 0;
+    background-color: black;
+}
 td,
 th {
 
@@ -169,11 +180,16 @@ th {
     text-align: center;
     padding: 8px;
     letter-spacing: 2px;
+    
 }
 
 tr:nth-child(even) {
 
     background-color: #232325;
+}
+tbody{
+    height: 60%;
+    width: 100%;
 }
 
 .normal-text {
@@ -222,4 +238,23 @@ textarea {
     border-radius: 4px;
     margin: 6px 0px;
     padding: 8px 1px;
+    color: white;
+    font-size: 1rem;
+}
+
+
+.desc{
+    max-width: 20rem;
+    word-wrap: break-word;
+    /* background-color: red; */
+}
+
+.name{
+    width: 20%;
+    /* background-color: yellow; */
+}
+
+.date{
+    width: 15%;
+    /* background-color: green; */
 }

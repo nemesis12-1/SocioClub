@@ -70,7 +70,12 @@
                         name="subject" placeholder="Write something.." required></textarea>
                 </div>
 
+                {% if request.user.is_authenticated %}
                 <input type="submit" value="Send Message">
+
+                {% else %}
+                <h3> You Need to login first</h3>
+                {% endif %}
                 {% endif %}
             </form>
         </div>
@@ -91,122 +96,115 @@
 
                     <div class="info-icon-contact">
                         <div class="icon-text">
-
                             <a href="https://github.com/nemesis12-1" target="_blank"> <img class="icon"
                                     src="{% static 'images/github.png' %}" alt=""></a>
                             <p>Github </p>
                         </div>
-                            <div class="icon-text">
-
-                                <a href="mailto:ashutoshsahu341@gmail.com"> <img class="icon"
-                                        src="{% static 'images/gmail.png' %}" alt=""></a>
-                                <p>Gmail</p>
-                            </div>
-                                <div class="icon-text">
-
-                                    <a href="https://www.instagram.com/_.ashu._s/"> <img class="icon"
-                                            src="{% static 'images/instagram.png ' %}" alt=""></a>
-                                    <p>Instagram</p>
-                                </div>
-                            </div>
-                            </div>
-
-                            <div class="text-container">
-                                <h4>Ashutoh Sahu</h4>
-                                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Officia suscipit dolor
-                                    cupiditate. Sed
-                                    soluta </p>
-
-                            </div>
-
-
-
+                        <div class="icon-text">
+                            <a href="mailto:ashutoshsahu341@gmail.com"> <img class="icon"
+                                    src="{% static 'images/gmail.png' %}" alt=""></a>
+                            <p>Gmail</p>
                         </div>
-
-                        <div class="cards" id="mihir-card">
-
-                            <div class="info-container">
-
-                                <div class="info-img">
-                                    <img src="{% static 'images/mihir-avatar.png' %}" id="mihir-img"
-                                        alt="Mihir ~ Creator">
-                                </div>
-
-                                <div class="info-icon-contact">
-
-                                    <div class="icon-text">
-                                        <a href="https://github.com/RadiiSol" target="_blank"> <img class="icon"
-                                                src="{% static 'images/github.png' %}" alt="">
-                                        </a>
-                                        <p>Github </p>
-
-                                    </div>
-
-                                    <div class="icon-text">
-
-                                        <a href="mailto:mihirpg2014@gmail.com"> <img class="icon"
-                                                src="{% static 'images/gmail.png' %}" alt=""></a>
-                                        <p>Gmail</p>
-
-                                    </div>
-
-                                    <div class="icon-text">
-
-                                        <a href="https://www.instagram.com/_mihirgujarathi_014/"> <img class="icon"
-                                                src="{% static 'images/instagram.png ' %}" alt=""></a>
-                                        <p>Instagram</p>
-
-                                    </div>
-
-                                </div>
-
-                            </div>
-
-                            <div class="text-container">
-                                <h4>Mihir Gujarathi</h4>
-                                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Officia suscipit dolor
-                                    cupiditate. Sed
-                                    soluta </p>
-
-                            </div>
-
+                        <div class="icon-text">
+                            <a href="https://www.instagram.com/_.ashu._s/"> <img class="icon"
+                                    src="{% static 'images/instagram.png ' %}" alt=""></a>
+                            <p>Instagram</p>
                         </div>
-
                     </div>
+                </div>
+
+                <div class="text-container">
+                    <h4>Ashutoh Sahu</h4>
+                    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Officia suscipit dolor
+                        cupiditate. Sed
+                        soluta </p>
+
                 </div>
 
 
 
             </div>
 
+            <div class="cards" id="mihir-card">
 
-            <script>
+                <div class="info-container">
 
-                ashu_card = document.getElementById("ashu-card");
-                mihir_card = document.getElementById("mihir-card");
+                    <div class="info-img">
+                        <img src="{% static 'images/mihir-avatar.png' %}" id="mihir-img" alt="Mihir ~ Creator">
+                    </div>
 
-                ashu_img = document.getElementById("ashu-img");
-                mihir_img = document.getElementById("mihir-img");
+                    <div class="info-icon-contact">
 
-                ashu_card.addEventListener('mouseover', function handleMouseOver() {
-                    ashu_img.src = "{% static 'images/ashu-avatar-hover.png' %}";
-                });
+                        <div class="icon-text">
+                            <a href="https://github.com/RadiiSol" target="_blank"> <img class="icon"
+                                    src="{% static 'images/github.png' %}" alt="">
+                            </a>
+                            <p>Github </p>
 
-                ashu_card.addEventListener('mouseout', function handleMouseOut() {
-                    ashu_img.src = "{% static 'images/ashu-avatar.png' %}"
-                });
+                        </div>
 
-                mihir_card.addEventListener('mouseover', function handleMouseOver() {
-                    mihir_img.src = "{% static 'images/mihir-avatar-hover.png' %}";
-                });
+                        <div class="icon-text">
 
-                mihir_card.addEventListener('mouseout', function handleMouseOut() {
-                    mihir_img.src = "{% static 'images/mihir-avatar.png' %}"
-                });
+                            <a href="mailto:mihirpg2014@gmail.com"> <img class="icon"
+                                    src="{% static 'images/gmail.png' %}" alt=""></a>
+                            <p>Gmail</p>
+
+                        </div>
+
+                        <div class="icon-text">
+
+                            <a href="https://www.instagram.com/_mihirgujarathi_014/"> <img class="icon"
+                                    src="{% static 'images/instagram.png ' %}" alt=""></a>
+                            <p>Instagram</p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="text-container">
+                    <h4>Mihir Gujarathi</h4>
+                    <p>I am a Computer Science student with a penchant for design and making innovative, user-friendly web design. I am looking to expand my knowledge in the industry.</p>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+
+
+</div>
+
+
+<script>
+
+    ashu_card = document.getElementById("ashu-card");
+    mihir_card = document.getElementById("mihir-card");
+
+    ashu_img = document.getElementById("ashu-img");
+    mihir_img = document.getElementById("mihir-img");
+
+    ashu_card.addEventListener('mouseover', function handleMouseOver() {
+        ashu_img.src = "{% static 'images/ashu-avatar-hover.png' %}";
+    });
+
+    ashu_card.addEventListener('mouseout', function handleMouseOut() {
+        ashu_img.src = "{% static 'images/ashu-avatar.png' %}"
+    });
+
+    mihir_card.addEventListener('mouseover', function handleMouseOver() {
+        mihir_img.src = "{% static 'images/mihir-avatar-hover.png' %}";
+    });
+
+    mihir_card.addEventListener('mouseout', function handleMouseOut() {
+        mihir_img.src = "{% static 'images/mihir-avatar.png' %}"
+    });
 
 
 //{% static 'images/mihir-avatar.png' %}
-            </script>
+</script>
 
 
-            {% endblock %}
+{% endblock %}

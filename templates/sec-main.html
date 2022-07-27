@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+{% load static %}
+{% url 'login' as login %}
+{%block titleblock%} SocioClub | Secretary {% endblock %}
+
+
+{%block cssblock%}
+<link rel="stylesheet" href="{% static 'css/sec-main.css'%}"> {%endblock%}
+
+{% block mainblock %}
+
+
+<div class="sec-container">
+
+    <div class="sec-left">
+        <h3>Secretary Maintenance</h3>
+        <hr>
+        <div class="only-table-main">
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Flat/Wing No. </th>
+                    <th>Amount</th>
+                    <th>Month</th>
+                    <th>Year</th>
+                    <th>Payment Date</th>
+                    <th></th>
+                </tr>
+            </thead>
+            
+           <tbody>
+               <tr>
+                   <td>option</td>
+                   <td>option</td>
+                   <td>option</td>
+                   <td>option</td>
+                   <td>option</td>
+                   <td> <button class="select-btn">Select</button></td>
+                </tr>
+                
+            </tbody>
+           
+           
+            
+        </table>
+     </div>
+    </div>
+
+    <div class="sec-right">
+        <div class="sec-right-text">
+            <!-- <p>** If the Maintenance Amount is already paid , and it's not showing in the history table kindly request to
+                the secratory by submitting the below form. **</p>
+            <h5>Thanks for the Consideration</h5> -->
+
+        </div>
+
+        <div class="sec-right-form">
+            <form method="POST" action="{% url 'sec_main' %}">
+                {% csrf_token %}
+
+                <label>Flat no</label>
+                {% if error %}
+                <input type="text" name="sec_flat" placeholder="Flat Does Not Exist">
+                {% else %}
+                <input type="text" name="sec_flat" placeholder="Enter Your Flat No">
+                {% endif %}
+                <label>Amount</label>
+                <input type="text"> 
+                <label>Month</label>
+                <input type="text" name="sec_month">
+                <label>Year</label>
+                <input type="text" name="sec_year">
+                <label>Payment Date</label>
+                <input type="text" name="sec_payment_date">
+
+                <input type="submit" value="Add">
+
+
+            </form>
+
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}

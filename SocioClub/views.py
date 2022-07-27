@@ -127,7 +127,7 @@ def contact_us(request):
 
 @login_required(login_url='login')
 def complain_view(request):
-    complains = Complain.objects.filter(complain_user=request.user)
+    complains = Complain.objects.filter(complain_user=request.user).order_by('-id')[:10]
     return render(request, "view-complain.html", {'complains': complains})
 
 
@@ -156,33 +156,17 @@ def add_complain(request):
     return render(request, "complain.html")
 
 
-# @login_required(login_url='login')
+@login_required(login_url='login')
 def maintenance(request):
     maintenance_data = Maintenance.objects.filter(maintenance_user = request.user).order_by('-maintenance_month')
     
     society_name = User_Detail.objects.get(user=request.user).society_name
     flat = User_Detail.objects.get(user = request.user).flat
 
-    print("")
-    print(maintenance_data)
-    print("")
-
-    for m in maintenance_data:
-        print("")
-        print("Month: ")
-        print(m.maintenance_month)
-        print("")
-        print("Payment: ")
-        if m.payment_date == "":
-            print("No value")
-        else:
-            print(m.payment_date)
-        print("")
-
     return render(request, "maintenance.html", {'society_name': society_name, 'maintenance_data': maintenance_data, 'flat': flat})
 
 
-# @login_required(login_url='login')
+@login_required(login_url='login')
 def event(request):
     society_name = User_Detail.objects.get(user=request.user).society_name
     events = Event.objects.filter(society_name = society_name)
@@ -208,26 +192,52 @@ def test(request):
     maintenance_data = Maintenance.objects.filter(maintenance_user = request.user).order_by('-maintenance_month')
     return render(request, "test.html", {'maintenance_data': maintenance_data})
 
-def secretary(request):
+def sec_main(request):
+    
+    maintenance_data = Maintenance.objects.all()
     if request.method == 'POST':
 
-        a = request.POST['a']
-        b = request.POST['b']
-        c = request.POST['c']
-        d = request.POST.get('d')
+        sec_flat = request.POST['sec_flat']
+        maintenance_month = request.POST['sec_month']
+        maintenance_year = request.POST['sec_year']
+        payment_date = request.POST.get('sec_payment_date')
 
-        if User_Detail.objects.filter(flat=a).exists():
-            flatno = User_Detail.objects.get(flat=a)
-            m = Maintenance(maintenance_user = flatno.user , maintenance_month = b , maintenance_year = c , payment_date = d )
+        if User_Detail.objects.filter(flat=sec_flat).exists():
+            flatno = User_Detail.objects.get(flat=sec_flat)
+            m = Maintenance(maintenance_user = flatno.user , maintenance_month = maintenance_month , maintenance_year = maintenance_year , payment_date = payment_date )
             m.save()
         else:
-            return redirect('index')
-    return render(request, "secretary.html")
+            return render(request, "sec-main.html", {'maintenance_data': maintenance_data ,'error': 'Flat/Wing Number does not exist'})
+
+    return render(request, "sec-main.html", {'maintenance_data': maintenance_data})
 
 
 def sec_complain(request):
-        return render (request , "sec-complain.html")
+    society_name = User_Detail.objects.get(user = request.user).society_name
+    users_current_society = User_Detail.objects.filter(society_name = society_name)
+    # complains_data = Complain.objects.filter(complain_user = users_current_society).order_by('-id')
+    print("")
+    print("")
+    print(users_current_society)
+    # print(complains_data)
+    print("")
+    print("")
+    return render (request , "sec-complain.html")
 
 
-def sec_event(request):
-        return render (request , "sec-event.html")
+def  sec_event(request):
+    society_name = User_Detail.objects.get(user=request.user).society_name
+    events = Event.objects.filter(society_name = society_name).order_by('-event_start_date')
+
+    if request.method == 'POST':
+        event_name = request.POST['event_name']
+        event_description = request.POST['event_description']
+        event_start_date = request.POST['event_start_date']
+        event_end_date = request.POST['event_end_date']
+        event_start = datetime.strptime(event_start_date, '%Y-%m-%dT%H:%M')
+        event_end = datetime.strptime(event_end_date, '%Y-%m-%dT%H:%M')
+  
+        sec_event_var = Event(society_name=society_name, event_name=event_name, event_description=event_description, event_start_date = event_start , event_end_date=event_end)
+        sec_event_var.save()
+
+    return render (request, "sec-event.html", {'events': events})

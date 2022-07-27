@@ -155,13 +155,25 @@ input[type=text] {
 }
 
 table {
-    margin-top: 10px;
+    /* margin-top: 10px; */
     border-collapse: collapse;
     width: 100%;
     font-family: 'Montserrat', sans-serif;
 
 }
 
+.only-table-main{
+    overflow-y: scroll;
+    height: 80%;
+    width: 100%;
+
+}
+thead th{
+    z-index: 2;
+    position: sticky;
+    top: 0;
+    background-color: black;
+}
 td,
 th {
 
@@ -174,6 +186,9 @@ th {
 tr:nth-child(even) {
 
     background-color: #232325;
+}
+tbody{
+    height: 60%;
 }
 
 .normal-text {

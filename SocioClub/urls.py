@@ -15,7 +15,7 @@ urlpatterns = [
     path('complain/', views.complain_view , name = "complain"),
     path('add_complain/', views.add_complain , name = "add_complain"),
     path('test/', views.test , name = "test"),
-    path('secretary/', views.secretary , name = "secretary"),
+    path('sec_main/', views.sec_main, name = "sec_main"),
     path('sec_complain/', views.sec_complain , name = "sec_complain"),
     path('sec_event/', views.sec_event , name = "sec_event"),
     # path('user/', include("user_data.urls")),

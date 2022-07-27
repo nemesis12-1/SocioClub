@@ -15,48 +15,48 @@
     <div class="mt-left">
         <h3>{{society_name}}</h3>
         <hr>
-        <table>
-            <tr>
-                <th>Flat/Wing No. </th>
-                <th>Amount</th>
-                <th>Month</th>
-                <th>Year</th>
-                <th>Payment Date</th>
-            </tr>
 
-            {% for m in maintenance_data %}
-            <tr>
-                <td>{{flat}}</td>
-                <td>option1</td>
-                <td>{{m.maintenance_month}}</td>
-                <td>{{m.maintenance_year}}</td>
+        <div class="only-table-main">
+            <table>
+                <thead>
 
-                {% if m.payment_date == "" %}
-                    <td>Not Paid</td>
-                {% else %}
-                    <td>{{m.payment_date}}</td>
-                {% endif %}
+                    <tr>
+                        <th>Flat/Wing No. </th>
+                        <th>Amount</th>
+                        <th>Month</th>
+                        <th>Year</th>
+                        <th>Payment Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for m in maintenance_data %}
 
-            </tr>
-            {% endfor %}
+                    <tr>
+                        <td>{{flat}}</td>
+                        <td>option1</td>
+                        <td>{{m.maintenance_month}}</td>
+                        <td>{{m.maintenance_year}}</td>
 
-        </table>
+                        {% if m.payment_date == "" %}
+                        <td>Not Paid</td>
+                        {% else %}
+                        <td>{{m.payment_date}}</td>
+                        {% endif %}
 
-        <!-- <p class="normal-text">
+                    </tr>
+                    {% endfor %}
+                </tbody>
 
-            Payment Stucture <br>
-            *Water : 200 ruppes <br>
-            *Electricity : 400 rupees <br>
-            *Maintenance : 1000 rupees <br>
-            *Total : 1600 exclude CGST <br>
-        </p> -->
-
+            </table>
+        </div>
+    
 
     </div>
 
     <div class="mt-right">
         <div class="mt-right-text">
-            <p>** If the Maintenance Amount is already paid , and it's not showing in the history table kindly request to
+            <p>** If the Maintenance Amount is already paid , and it's not showing in the history table kindly request
+                to
                 the secratory by submitting the below form. **</p>
             <h5>Thanks for the Consideration</h5>
 
