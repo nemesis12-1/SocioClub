@@ -10,6 +10,7 @@
 {% block mainblock %}
 
 
+
 <div class="sec-container">
 
     <div class="sec-left">
@@ -50,7 +51,12 @@
                         <td class="desc">{{e.event_description}}</td>
                         <td class="date">{{e.event_start_date}}</td>
                         <td class="date">{{e.event_end_date}}</td>
-                        <td> <button class="select-btn">Select</button></td>
+                        <td> <button class="select-btn" 
+                            onclick="func(
+                                '{{e.event_name}}', 
+                                '{{e.event_description}}',
+                                '{{e.event_start_date}}',
+                                '{{e.event_end_date}}')">Select</button></td>
                         <td> <button class="select-btn">Delete</button></td>
                     </tr>
                     {% endfor %}

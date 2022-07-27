@@ -1,5 +1,5 @@
 from django.http import HttpResponse
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, HttpResponseRedirect
 from django.contrib.auth.models import User
 from django.contrib import auth
 from django.contrib.auth import authenticate, login, logout
@@ -198,9 +198,9 @@ def sec_main(request):
         maintenance_year = request.POST['sec_year']
         payment_date = request.POST.get('sec_payment_date')
         
-        maintenance_user = Flatno.objects.get(flat=sec_flat).owner
 
         if Flatno.objects.filter(flat=sec_flat).exists():
+            maintenance_user = Flatno.objects.get(flat=sec_flat).owner
             flat = Flatno.objects.get(flat=sec_flat)
             m = Maintenance(
                 society_name=society_name, 
@@ -216,6 +216,13 @@ def sec_main(request):
             return render(request, "sec-main.html", {'maintenance_data': maintenance_data ,'error': 'Flat/Wing Number does not exist'})
 
     return render(request, "sec-main.html", {'maintenance_data': maintenance_data})
+
+def delete_main(request, id):
+    if request.method == 'POST':
+        pi = Maintenance.objects.get(pk=id)
+        pi.delete()
+        return redirect('sec_main')
+    return redirect('sec_main')
 
 
 def sec_complain(request):

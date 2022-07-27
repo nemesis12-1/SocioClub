@@ -40,7 +40,9 @@ nav .right a:hover::before {
     display: flex;
     flex: 1;
     position: relative;
-    background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+    background-color: #232325;
+
+    /* background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab); */
     background-size: 400% 400%;
     animation: gradient 10s ease infinite;
 }
@@ -221,9 +223,9 @@ select {
 
 .view-box a:hover {
 
-    font-size: 20px;
+    letter-spacing: 2px;
     background-color: #e73c7e;
-    transition: 0.5s ease;
+    transition: 0.3s ease;
 }
 
 label {

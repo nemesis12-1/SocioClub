@@ -5,9 +5,11 @@
 
 
 {%block cssblock%}
-<link rel="stylesheet" href="{% static 'css/sec-complain.css'%}"> {%endblock%}
-
+<link rel="stylesheet" href="{% static 'css/sec-complain.css'%}"> 
+<link rel="stylesheet" href="{% static 'css/global.css'%}">
+{%endblock%}
 {% block mainblock %}
+
 
 
 <div class="sec-container">
@@ -27,6 +29,7 @@
                         <th>Complain Type</th>
                         <th>Status</th>
                         <!-- <th>Payment Date</th> -->
+                        <th></th>
                         <th></th>
                     </tr>
                     
@@ -55,7 +58,8 @@
                     <td>option</td>
                     <td>option</td>
                     <!-- <td>option</td> -->
-                    <td> <button class="select-btn">Select</button></td>
+                    <td> <button class="select-btn green">Select</button></td>
+                    <td> <button class="select-btn red ">Delete</button></td>
                 </tr>
                 
             </tbody>

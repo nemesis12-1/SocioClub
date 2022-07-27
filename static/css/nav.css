@@ -1,7 +1,6 @@
 /* body {
     height: 100%;
 } */
-
 body {
     overflow: hidden;
 }
@@ -184,8 +183,8 @@ height: 2rem;
 }
 
 .btn1 a:hover{
-font-size: 1.5rem;
-padding: 1rem;
+letter-spacing: 2px;
+/* padding: 1rem; */
 color: black;
 background-color: white;
 
