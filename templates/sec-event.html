@@ -9,7 +9,18 @@
 
 {% block mainblock %}
 
+<div class="dialogue-box">
+    <div class="box">
+        <h4>Are you sure you want to delete this record</h4>
+            <form method="POST" class="box-btn" onsubmit="event.preventDefault();" id="delete_form">
+                {% csrf_token %}
 
+                <button onclick="del()" type="submit">YES</button>
+                <button onclick="closeBox()">NO</button>
+
+            </form>
+    </div>
+</div>
 
 <div class="sec-container">
 
@@ -52,12 +63,12 @@
                         <td class="date">{{e.event_start_date}}</td>
                         <td class="date">{{e.event_end_date}}</td>
                         <td> <button class="select-btn" 
-                            onclick="func(
+                            onclick="select_event(
                                 '{{e.event_name}}', 
                                 '{{e.event_description}}',
                                 '{{e.event_start_date}}',
                                 '{{e.event_end_date}}')">Select</button></td>
-                        <td> <button class="select-btn">Delete</button></td>
+                        <td> <button onclick="del_event('{{e.id}}')" class="select-btn">Delete</button></td>
                     </tr>
                     {% endfor %}
 
@@ -81,17 +92,21 @@
 
                 {% csrf_token %}
                 <label>Name</label>
-                <input type="text" name="event_name" maxlength="100">
+                <input type="text" name="event_name" maxlength="100" id="event_name">
                 <label>Description</label>
 
-                <textarea id="details" name="event_description" rows="10" placeholder="Write something.." maxlength="500" required></textarea>
+                <textarea id="event_description" name="event_description" rows="10" placeholder="Write something.." maxlength="500" required></textarea>
 
                 <label>Start Date</label>
-                <input type="datetime-local" name="event_start_date">
+                <input type="datetime-local" name="event_start_date" id="event_start_date">
                 <label>End Date</label>
-                <input type="datetime-local" name="event_end_date">
+                <input type="datetime-local" name="event_end_date" id="event_end_date">
 
-                <input type="submit" value="Add">
+                <div class="add-update">
+
+                    <input type="submit" value="Add">
+                    <input type="submit" value="Update">
+                </div>
 
 
             </form>
@@ -101,30 +116,86 @@
 
 </div>
 
-<!-- <h1>
-    Events
-</h1>
-<form method="POST" >
-    {% csrf_token %}
-
-    <input type="text" placeholder="Name" name="event-name">
-    <input type="number" placeholder="Decription" name="event-desc">
-    <input type="number" placeholder="Start Date" name="event-start-date">
-    <input type="text" placeholder="End Date" name="event-end-date" >
-    <input type="submit">
-</form>
-
-<h1>Complain</h1>
-<form method="POST">
-    {% csrf_token %}
-
-    <input type="text" placeholder="Status" name="complain-status">
-    
-    <input type="submit">
-</form> -->
 
 <script>
-    console.log("{{events}}")
+
+    console.log("Working JS");
+    var delete_id = 0;
+
+    var dialogue_box = document.querySelector(".dialogue-box");
+    var sec_container = document.querySelector(".sec-container");
+
+    var delete_form = document.getElementById('delete_form');
+    
+    function select_event(name, desc, start, end) {
+        
+        console.log("Name: " + name);
+        console.log("desc: " + desc);
+        console.log("start: " + start);
+        console.log("end: " + end);
+
+        var var1 = start.split(",").map(function(item){
+            return item.trim();
+        });
+
+        var now = new Date(var1[0]);
+        now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
+
+        var start_date = now.toISOString().slice(0,16);
+        start_date = start_date.replace(start_date.substring(0,4), var1[1]);
+
+
+        var var2 = end.split(",").map(function(item){
+            return item.trim();
+        });
+        
+        var now = new Date(var2[0]);
+        now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
+
+        var end_date = now.toISOString().slice(0,16);
+        end_date = end_date.replace(end_date.substring(0,4), var2[1]);
+
+        event_name = document.getElementById("event_name");
+        event_description = document.getElementById("event_description");
+        event_start_date = document.getElementById("event_start_date");
+        event_end_date = document.getElementById("event_end_date");
+
+
+        event_name.value = name;
+        event_description.value = desc;
+        event_start_date.value = start_date;
+        event_end_date.value = end_date;
+        console.log("Ending of function");
+
+    }
+     
+    function del_event(id) {
+        delete_id = id;
+        console.log("id generated is");
+        console.log(id);
+        // delete_form.action = "http://127.0.0.1:8000/delete_event/" + delete_id +"/";
+        console.log(delete_form.action)
+        console.log(delete_form.onsubmit)
+        openBox();
+    }
+    
+    function openBox() {
+        dialogue_box.style.transform = "translate(-50% , -50%) scale(1)";
+        sec_container.classList.add("blur");
+    }
+    
+    function closeBox() {
+        dialogue_box.style.transform = "translate(-50% , -50%) scale(0)";
+        sec_container.classList.remove("blur");
+    }
+
+    function del() {
+        console.log("Actually deleting");
+        console.log(delete_id);
+        delete_form.submit();
+        closeBox();
+    }
+
 </script>
 
 

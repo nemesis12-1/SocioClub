@@ -118,7 +118,7 @@ input[type=text] {
 }
 
 .sec-right .sec-right-form form input[type=submit] {
-    width: 70%;
+    width: 40%;
     background-color: #bfbdc8;
     color: white;
     font-weight: bolder;
@@ -136,7 +136,7 @@ input[type=text] {
 .sec-right .sec-right-form form input[type=submit]:hover {
 
     /* font-size: 20px; */
-    letter-spacing: 3px;
+    letter-spacing: 2px;
     color: black;
 
 }
@@ -270,4 +270,12 @@ button size fix
     border: 1px solid transparent;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
     
+}
+
+.add-update{
+
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+
 }

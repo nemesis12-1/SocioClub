@@ -62,7 +62,7 @@
                         {% endif %}
  
                         
-                        <td> <button class="select-btn" onclick="func('{{m.maintenance_flat}}', {{m.maintenance_amount}}, {{m.maintenance_month}}, {{m.maintenance_year}})">Select</button>
+                        <td> <button class="select-btn" onclick="select_main('{{m.maintenance_flat}}', {{m.maintenance_amount}}, {{m.maintenance_month}}, {{m.maintenance_year}})">Select</button>
                         </td>
                         <td> <button class="select-btn" onclick="del_main('{{m.id}}')">Delete</button></td>
                     </tr>
@@ -107,7 +107,11 @@
                 <label>Payment Date</label>
                 <input type="datetime-local" name="sec_payment_date" id="sec_payment_date">
 
-                <input type="submit" value="Add">
+                <div class="add-update">
+
+                    <input type="submit" value="Add">
+                    <input type="submit" value="Update">
+                </div>
 
 
             </form>
@@ -127,7 +131,7 @@
 
     var delete_form = document.getElementById('delete_form');
     
-    function func(flat, amount, month, year) {
+    function select_main(flat, amount, month, year) {
 
         console.log("Beginning of function");
         sec_flat = document.getElementById("sec_flat");
@@ -140,7 +144,6 @@
         sec_amount.value = amount;
         sec_month.value = month;
         sec_year.value = year;
-        // sec_payment_date.value = date;
         console.log("Ending of function");
 
     }
@@ -152,8 +155,6 @@
         delete_form.action = "http://127.0.0.1:8000/delete_main/" + delete_id +"/";
         console.log(delete_form.action)
         console.log(delete_form.onsubmit)
-        // dialogue_box.style.display = "block";
-        // dialogue_box.style.top = "50%";
         openBox();
     }
     
@@ -163,8 +164,6 @@
     }
     
     function closeBox() {
-        // dialogue_box.style.display = "none";
-        // dialogue_box.style.top = "-10%";
         dialogue_box.style.transform = "translate(-50% , -50%) scale(0)";
         sec_container.classList.remove("blur");
     }
