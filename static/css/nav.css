@@ -134,26 +134,22 @@ height: 2rem;
 }
 
 .cross {
-    position: relative;
-    top: -2%;
-    /* left: 35%; */
+   
     height: 2rem;
     width: 2rem;
     /* background-color: red; */
     font-size: 2rem;
     cursor: pointer;
-    margin: 2rem 2rem 0 0 ;
+    margin: 2rem 1rem 0 0 ;
 }
 
 .user-profile-data{
     
-    position: relative;
-    top: 10%;
-    /* left: 30%; */
+
     color: black;
     margin-top: 7rem;
-    width: 50rem;
-    padding: 15%;
+    width: 80%;
+    padding: 5%;
     /* background-color: blueviolet; */
     
 }

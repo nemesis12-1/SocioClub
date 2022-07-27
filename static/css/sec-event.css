@@ -221,7 +221,7 @@ button size fix
     color: white;
     border-radius: 0.5rem;
     cursor: pointer;
-    margin-left: 2rem;
+    /* margin-left: 0.5rem; */
 }
 
 .select-btn:hover{

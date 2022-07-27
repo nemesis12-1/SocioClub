@@ -12,7 +12,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+    <link rel="icon"href="{% static 'images/favicon.ico' %}">
     <title>{%block titleblock%} Navbar base {%endblock%}</title>
 
     <link rel="stylesheet" href="{% static 'css/nav.css'%}">
@@ -76,9 +76,19 @@
             <h6>Society name: {{user.soceity_name}} </h6> -->
 
             <div class="btn1">
-                <!-- <a href="{% url 'logout' %}" target="_blank">sec main</a> -->
+                <a href="{% url 'logout' %}" target="_blank">Logout</a>
             </div>
-            
+
+            <div class="to-sign-up">
+            <a href="{% url 'signup' %}">Sign up </a>
+
+            </div>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
             <a href="{% url 'sec_main' %}" target="_blank">sec main</a><br>
             <a href="{% url 'sec_complain' %}" target="_blank">sec complain</a><br>
             <a href="{% url 'sec_event' %}" target="_blank">sec event</a><br>

@@ -212,17 +212,46 @@ button size fix
 
 
 .select-btn{
-
+    
     font-size: 1rem;
     padding: 0.5rem;
     background-color: black;
     color: white;
     border-radius: 0.5rem;
     cursor: pointer;
-    margin-left: 2rem;
+    /* margin-left: 2rem; */
 }
 
 .select-btn:hover{
     background-color: white;
     color: black;
+}
+
+
+.box{
+    background-color: antiquewhite;
+    padding: 1rem;
+    color: black;
+    height: 5rem;
+    z-index: 4;
+    border-radius: 1rem;
+}
+
+.box h4{
+    color: black;
+}
+.box-btn{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    margin-top: 2rem;
+}
+.box button{
+    padding: 0.5rem;
+    font-size: 1rem;
+    color: black;
+    border-radius: 0.5rem;
+    border: 1px solid transparent;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    
 }
