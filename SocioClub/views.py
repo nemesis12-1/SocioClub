@@ -1,11 +1,9 @@
-
-
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.contrib import auth
 from django.contrib.auth import authenticate, login, logout
-from user_data.models import Maintenance, Society, User_Detail, Complain, Contact, Event
+from user_data.models import Maintenance, Society, User_Detail, Complain, Contact, Event, Flatno
 from datetime import date, datetime
 from django.contrib.auth.decorators import login_required
 
@@ -77,28 +75,25 @@ def signup(request):
             'society_name': society_name,
         }
 
-        try:
-            user = User.objects.get(username=username)
-            return render(request, 'signup.html', {'error': 'Username exists', 'context': context, 'society_data': society_data})
-        except User.DoesNotExist:
-            if User.objects.filter(email=email).exists():
-                return render(request, 'signup.html', {'error': 'Email exists', 'context': context, 'society_data': society_data})
-
-            user = User.objects.create_user(
-                username=username, password=pass1, email=email, first_name=firstname, last_name=lastname)
-
-            # because One to Many Relation we have to fetch object
+        if User.objects.filter(username=username).exists():
+            return render(request, "signup.html", {'error':'Username exists', 'context':context, 'society_data':society_data})
+        elif User.objects.filter(email=email).exists():
+            return render(request, 'signup.html', {'error': 'Email exists', 'context': context, 'society_data': society_data})      
+        else:
+            user = User.objects.create_user(username=username, password=pass1, email=email, first_name=firstname, last_name=lastname)
             society = Society.objects.get(society_name=society_name)
+            flat_owner = User.objects.get(username=username)
+            create_flat = Flatno(flat=flat, society_name=society, owner=flat_owner)
+            create_flat.save()
+            flat_object = Flatno.objects.get(flat=flat)
 
-            newextendeduser = User_Detail(
-                user=user, phone=phone, flat=flat, society_name=society)
-            newextendeduser.save()
+            user_details = User_Detail(user=user,phone=phone,flat=flat_object,society_name=society)
+            user_details.save()
 
-            auth_user = authenticate(
-                request, username=username, password=pass1)
+            auth_user = authenticate(request, username=username, password=pass1)
             auth.login(request, auth_user)
 
-            return render(request, "signup.html", {'success': 'Successfully Created Account'})
+            return render(request, "signup.html", {'success': 'Successfully Created Account'})     
 
     return render(request, "signup.html", {'society_data': society_data})
 
@@ -134,15 +129,19 @@ def complain_view(request):
 @login_required(login_url='login')
 def add_complain(request):
     if request.method == "POST":
+        society_name = User_Detail.objects.get(user=request.user).society_name
         complain_title = request.POST['complain_name']
         complain_type = request.POST['complain_type']
         complain_description = request.POST['complain_description']
         complain_solution = request.POST['complain_solution']
         complain_date = date.today()
         complain_status = False
+        flat = Flatno.objects.get(owner=request.user)
 
         complain = Complain(
+            society_name = society_name,
             complain_user=request.user,
+            flat=flat,
             complain_title=complain_title,
             complain_type=complain_type,
             complain_description=complain_description,
@@ -159,11 +158,8 @@ def add_complain(request):
 @login_required(login_url='login')
 def maintenance(request):
     maintenance_data = Maintenance.objects.filter(maintenance_user = request.user).order_by('-maintenance_month')
-    
     society_name = User_Detail.objects.get(user=request.user).society_name
-    flat = User_Detail.objects.get(user = request.user).flat
-
-    return render(request, "maintenance.html", {'society_name': society_name, 'maintenance_data': maintenance_data, 'flat': flat})
+    return render(request, "maintenance.html", {'society_name': society_name, 'maintenance_data': maintenance_data})
 
 
 @login_required(login_url='login')
@@ -193,18 +189,28 @@ def test(request):
     return render(request, "test.html", {'maintenance_data': maintenance_data})
 
 def sec_main(request):
-    
-    maintenance_data = Maintenance.objects.all()
+    society_name = User_Detail.objects.get(user=request.user).society_name
+    maintenance_data = Maintenance.objects.filter(society_name=society_name)
     if request.method == 'POST':
 
         sec_flat = request.POST['sec_flat']
         maintenance_month = request.POST['sec_month']
         maintenance_year = request.POST['sec_year']
         payment_date = request.POST.get('sec_payment_date')
+        
+        maintenance_user = Flatno.objects.get(flat=sec_flat).owner
 
-        if User_Detail.objects.filter(flat=sec_flat).exists():
-            flatno = User_Detail.objects.get(flat=sec_flat)
-            m = Maintenance(maintenance_user = flatno.user , maintenance_month = maintenance_month , maintenance_year = maintenance_year , payment_date = payment_date )
+        if Flatno.objects.filter(flat=sec_flat).exists():
+            flat = Flatno.objects.get(flat=sec_flat)
+            m = Maintenance(
+                society_name=society_name, 
+                maintenance_user = maintenance_user,
+                maintenance_flat = flat,
+                maintenance_amount = 5000,
+                maintenance_month = maintenance_month, 
+                maintenance_year = maintenance_year, 
+                payment_date = payment_date
+            )
             m.save()
         else:
             return render(request, "sec-main.html", {'maintenance_data': maintenance_data ,'error': 'Flat/Wing Number does not exist'})
@@ -214,18 +220,17 @@ def sec_main(request):
 
 def sec_complain(request):
     society_name = User_Detail.objects.get(user = request.user).society_name
-    users_current_society = User_Detail.objects.filter(society_name = society_name)
     # complains_data = Complain.objects.filter(complain_user = users_current_society).order_by('-id')
+    complains_data = Complain.objects.filter(society_name=society_name).order_by('-complain_date')
     print("")
     print("")
-    print(users_current_society)
-    # print(complains_data)
+    print(complains_data)
     print("")
     print("")
-    return render (request , "sec-complain.html")
+    return render (request , "sec-complain.html", {'complains':complains_data})
 
 
-def  sec_event(request):
+def sec_event(request):
     society_name = User_Detail.objects.get(user=request.user).society_name
     events = Event.objects.filter(society_name = society_name).order_by('-event_start_date')
 
@@ -237,7 +242,13 @@ def  sec_event(request):
         event_start = datetime.strptime(event_start_date, '%Y-%m-%dT%H:%M')
         event_end = datetime.strptime(event_end_date, '%Y-%m-%dT%H:%M')
   
-        sec_event_var = Event(society_name=society_name, event_name=event_name, event_description=event_description, event_start_date = event_start , event_end_date=event_end)
+        sec_event_var = Event(
+            society_name=society_name, 
+            event_name=event_name, 
+            event_description=event_description, 
+            event_start_date = event_start, 
+            event_end_date=event_end
+        )
         sec_event_var.save()
 
     return render (request, "sec-event.html", {'events': events})

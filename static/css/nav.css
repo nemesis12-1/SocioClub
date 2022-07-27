@@ -147,7 +147,9 @@ height: 2rem;
 
 .user-profile-data{
     
- 
+    position: relative;
+    top: 10%;
+    /* left: 30%; */
     color: black;
     margin-top: 7rem;
     width: 50rem;

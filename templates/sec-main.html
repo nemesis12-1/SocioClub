@@ -17,34 +17,44 @@
         <hr>
         <div class="only-table-main">
 
-        <table>
-            <thead>
-                <tr>
-                    <th>Flat/Wing No. </th>
-                    <th>Amount</th>
-                    <th>Month</th>
-                    <th>Year</th>
-                    <th>Payment Date</th>
-                    <th></th>
-                </tr>
-            </thead>
-            
-           <tbody>
-               <tr>
-                   <td>option</td>
-                   <td>option</td>
-                   <td>option</td>
-                   <td>option</td>
-                   <td>option</td>
-                   <td> <button class="select-btn">Select</button></td>
-                </tr>
-                
-            </tbody>
-           
-           
-            
-        </table>
-     </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Flat/Wing No. </th>
+                        <th>Amount</th>
+                        <th>Month</th>
+                        <th>Year</th>
+                        <th>Payment Date</th>
+                        <th></th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    {% for m in maintenance_data %}
+
+                    <tr>
+                        <td>{{m.maintenance_flat}}</td>
+                        <td>{{m.maintenance_amount}}</td>
+                        <td>{{m.maintenance_month}}</td>
+                        <td>{{m.maintenance_year}}</td>
+
+                        {% if m.payment_date == "" %}
+                        <td>Not Paid</td>
+                        {% else %}
+                        <td>{{m.payment_date}}</td>
+                        {% endif %}
+
+                        <td> <button class="select-btn" onclick="func('{{m.maintenance_flat}}', {{m.maintenance_amount}}, {{m.maintenance_month}}, {{m.maintenance_year}})">Select</button></td>
+                    </tr>
+                    {% endfor %}
+
+
+                </tbody>
+
+
+
+            </table>
+        </div>
     </div>
 
     <div class="sec-right">
@@ -61,18 +71,18 @@
 
                 <label>Flat no</label>
                 {% if error %}
-                <input type="text" name="sec_flat" placeholder="Flat Does Not Exist">
+                <input type="text" name="sec_flat" id="sec_flat" placeholder="Flat Does Not Exist">
                 {% else %}
-                <input type="text" name="sec_flat" placeholder="Enter Your Flat No">
+                <input type="text" name="sec_flat" id="sec_flat" placeholder="Enter Your Flat No">
                 {% endif %}
                 <label>Amount</label>
-                <input type="text"> 
+                <input type="text" id="sec_amount">
                 <label>Month</label>
-                <input type="text" name="sec_month">
+                <input type="text" name="sec_month" id="sec_month">
                 <label>Year</label>
-                <input type="text" name="sec_year">
+                <input type="text" name="sec_year" id="sec_year">
                 <label>Payment Date</label>
-                <input type="text" name="sec_payment_date">
+                <input type="datetime-local" name="sec_payment_date" id="sec_payment_date">
 
                 <input type="submit" value="Add">
 
@@ -83,5 +93,29 @@
     </div>
 
 </div>
+
+<script>
+
+    console.log("Working JS")
+
+    function func(flat, amount, month, year) {
+
+        console.log("Beginning of function");
+        sec_flat = document.getElementById("sec_flat");
+        sec_amount = document.getElementById("sec_amount");
+        sec_month = document.getElementById("sec_month");
+        sec_year = document.getElementById("sec_year");
+        sec_payment_date = document.getElementById("sec_payment_date");
+
+        sec_flat.value = flat;
+        sec_amount.value = amount;
+        sec_month.value = month;
+        sec_year.value = year;
+        // sec_payment_date.value = date;
+        console.log("Ending of function");
+
+    }
+
+</script>
 
 {% endblock %}

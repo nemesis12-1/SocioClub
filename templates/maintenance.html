@@ -32,8 +32,8 @@
                     {% for m in maintenance_data %}
 
                     <tr>
-                        <td>{{flat}}</td>
-                        <td>option1</td>
+                        <td>{{m.maintenance_flat}}</td>
+                        <td>{{m.maintenance_amount}}</td>
                         <td>{{m.maintenance_month}}</td>
                         <td>{{m.maintenance_year}}</td>
 
@@ -57,22 +57,19 @@
         <div class="mt-right-text">
             <p>** If the Maintenance Amount is already paid , and it's not showing in the history table kindly request
                 to
-                the secratory by submitting the below form. **</p>
+                the secratory to update. **</p>
             <h5>Thanks for the Consideration</h5>
 
         </div>
 
         <div class="mt-right-form">
-            <form action="">
+            <img src="{% static 'images/maintenance-img.png' %}" alt="">
+            <!-- <form action="">
 
                 <label>Date</label>
                 <input type="date">
 
-                <!-- <label>Flat Status</label>
-                <select>
-                    <option value="">Owner</option>
-                    <option value="">Tenant</option>
-                </select> -->
+                
 
                 <label>Amount</label>
                 <input type="text">
@@ -80,7 +77,7 @@
                 <input type="submit" value="Request">
 
 
-            </form>
+            </form> -->
 
         </div>
     </div>

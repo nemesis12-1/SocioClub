@@ -43,18 +43,31 @@
                             </tr>
 
                         </thead>
-                        {% for event in ongoing_event %}
 
+                        
                         <tbody>
 
+                            
+                            {% if ongoing_event %}
+                            
+                            
+                            {% for event in ongoing_event %}
                             <tr>
                                 <td>{{event.event_name}}</td>
                                 <td class="th-2">{{event.event_description}}</td>
                                 <td>{{event.event_start_date}}</td>
                                 <td>{{event.event_end_date}}</td>
                             </tr>
+                            {% endfor %}
+                            {% else %}
+                            <tr>
+                                <td>No Event right now</td>
+                                <td>No Event right now</td>
+                                <td>No Event right now</td>
+                                <td>No Event right now</td>
+                            </tr>
+                            {% endif %}
                         </tbody>
-                        {% endfor %}
 
                     </table>
                 </div>
@@ -92,17 +105,31 @@
                             </tr>
                         </thead>
 
-                        {% for event in upcoming_event %}
                         <tbody>
-
+                            
+                            {% if upcoming_event %}
+                            
+                            {% for event in upcoming_event %}
                             <tr>
                                 <td>{{event.event_name}}</td>
                                 <td class="th-2">{{event.event_description}}</td>
                                 <td>{{event.event_start_date}}</td>
                                 <td>{{event.event_end_date}}</td>
                             </tr>
+
+                            {% endfor %}
+                            {% else %}
+
+                            <tr>
+                                <td>No Event right now</td>
+                                <td>No Event right now</td>
+                                <td>No Event right now</td>
+                                <td>No Event right now</td>
+                            </tr>
+
+                            {% endif %}
+
                         </tbody>
-                        {% endfor %}
                     </table>
                 </div>
             </div>

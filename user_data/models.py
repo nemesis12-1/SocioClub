@@ -12,15 +12,25 @@ class Society(models.Model):
     def __str__(self):
         return str(self.society_name)
 
+class Flatno (models.Model):
+    flat = models.CharField(max_length=10)
+    society_name = models.ForeignKey(Society, on_delete=models.CASCADE)
+    owner = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return str(self.flat)
+
 class User_Detail(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     phone = models.IntegerField()
-    flat = models.CharField(max_length=10)
+    flat = models.ForeignKey(Flatno, on_delete=models.CASCADE)
     user_type = models.SmallIntegerField(null=False, default=1)
     society_name = models.ForeignKey(Society, on_delete=models.CASCADE)
 
     def __str__(self):
         return str(self.user)
+
+
 
 class Event(models.Model):
     society_name = models.ForeignKey(Society, on_delete=models.CASCADE)
@@ -33,7 +43,9 @@ class Event(models.Model):
         return str(self.event_name) + ' ' + str(self.event_start_date)
 
 class Complain(models.Model):
+    society_name = models.ForeignKey(Society, on_delete=models.CASCADE)
     complain_user = models.ForeignKey(User, on_delete=models.CASCADE)
+    flat = models.ForeignKey(Flatno, on_delete=models.CASCADE)
     complain_title = models.CharField(max_length=50)
     complain_type = models.CharField(max_length=15)
     complain_description = models.TextField(max_length=500)
@@ -45,7 +57,10 @@ class Complain(models.Model):
         return str(self.complain_user) + ' ' + str(self.complain_title) + ' ' + str(self.complain_type)
 
 class Maintenance(models.Model):
+    society_name = models.ForeignKey(Society, on_delete=models.CASCADE)
     maintenance_user = models.ForeignKey(User, on_delete=models.CASCADE)
+    maintenance_flat = models.ForeignKey(Flatno, on_delete=models.CASCADE)
+    maintenance_amount = models.IntegerField()
     maintenance_month = models.IntegerField()
     maintenance_year = models.IntegerField()
     payment_date = models.CharField(null=True, max_length=15)

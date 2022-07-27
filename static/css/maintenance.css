@@ -13,7 +13,7 @@ body {
 }
 
 .maintenance-container {
-    background-color: lightcoral;
+    background-color: #edf5e1;
     display: flex;
     height: calc(100vh - 8vw);
     width: 100vw;
@@ -24,7 +24,7 @@ body {
 .mt-left {
     width: 70%;
     /* height: 100%; */
-    background-color: #9881ff;
+    background-color: #05386bbf;
 }
 
 .mt-right {
@@ -79,10 +79,18 @@ body {
     margin: 2rem;
     width: 80%;
     padding: 0.5rem;
-    /* background-color: red; */
+    background-color: red;
+    /* max-width: 10%; */
 
 }
 
+.mt-right-form img{
+    height: 400px;
+    width: auto;
+}
+
+
+/*
 
 .mt-right form label {
     font-size: 1.2rem;
@@ -131,10 +139,10 @@ input[type=text] {
 .mt-right .mt-right-form form input[type=submit]:hover {
 
     /* font-size: 20px; */
-    letter-spacing: 3px;
+    /* letter-spacing: 3px;
     color: black;
 
-}
+} */ 
 
 .mt-left h3 {
 
@@ -164,13 +172,13 @@ thead th{
     z-index: 2;
     position: sticky;
     top: 0;
-    background-color: yellow;
+    background-color: #5cdb95;
 }
 
 td,
 th {
 
-    border: 2px soild red;
+    /* border: 2px soild red; */
     text-align: center;
     padding: 8px;
     letter-spacing: 2px;
@@ -182,7 +190,7 @@ tbody{
 
 tr:nth-child(even) {
 
-    background-color: #fff07f;
+    background-color: #8ee4af;
 }
 
 .normal-text {
