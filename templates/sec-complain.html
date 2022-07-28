@@ -6,7 +6,7 @@
 
 {%block cssblock%}
 <link rel="stylesheet" href="{% static 'css/sec-complain.css'%}"> 
-<link rel="stylesheet" href="{% static 'css/global.css'%}">
+<!-- <link rel="stylesheet" href="{% static 'css/global.css'%}"> -->
 {%endblock%}
 {% block mainblock %}
 
@@ -25,9 +25,10 @@
 
                     <tr>
                         <th>Date</th>
-                        <th>Complain Name </th>
-                        <th>Complain Type</th>
+                        <th>Flat No. </th>
+                        <th>Complain Description </th>
                         <th>Status</th>
+                        <th>Complain Type</th>
                         <!-- <th>Payment Date</th> -->
                         <th></th>
                         <th></th>
@@ -52,15 +53,30 @@
             {% endfor %} -->
             <tbody>
 
-                  <tr>
-                      <td>option</td>
-                      <td>option</td>
-                    <td>option</td>
-                    <td>option</td>
-                    <!-- <td>option</td> -->
+                {%if complains%}
+
+                {% for c in complains %}
+                <tr>
+                    <td data-column="Date">{{c.complain_date}}</td>
+                    <td data-column="Complain Name">{{c.flat}}</td>
+                    <td data-column="Complain Description">{{c.complain_description}}</td>
+                    <td data-column="Solution">{{c.complain_status}}</td>
+                    <td data-column="Complain Type">{{c.complain_type}}</td>
                     <td> <button class="select-btn green">Select</button></td>
-                    <td> <button class="select-btn red ">Delete</button></td>
+                    <!-- <td> <button class="select-btn red ">Delete</button></td> -->
                 </tr>
+                {% endfor %}
+
+                {%else%}
+
+                <td data-column="Date">No Records Found</td>
+                <td data-column="Complain Name">No Records Found</td>
+                <td data-column="Complain Type">No Records Found</td>
+                <td data-column="Status">No Records Found</td>
+                <td data-column="Status">No Records Found</td>
+
+
+                {%endif%}
                 
             </tbody>
 
@@ -82,13 +98,13 @@
             <form action="">
 
                 <label>Date</label>
-                <input type="text">
-                <label>Complain Name</label>
-                <input type="text">
+                <input type="text" placeholder="Date" readonly>
+                <label>Flat No.</label>
+                <input type="text" placeholder="Flat No." readonly>
                 <label>Complain Type</label>
-                <input type="text">
-                <label>Status</label>
-                <input type="text">
+                <input type="text" placeholder="Complain type" readonly>
+                <label>Solution</label>
+                <textarea id="complain-solution" name="complain-solution" rows="10" placeholder="Complain Solution" maxlength="500" required></textarea>
                 <!-- <label>Payment Date</label>
                 <input type="text"> -->
 

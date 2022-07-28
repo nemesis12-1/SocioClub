@@ -225,6 +225,30 @@ def delete_main(request, id):
     return redirect('sec_main')
 
 
+def update_main(request, id):
+    if request.method == 'POST':
+        pi = Maintenance.objects.get(pk=id)
+        sec_flat = request.POST['sec_flat']
+        maintenance_month = request.POST['sec_month']
+        maintenance_year = request.POST['sec_year']
+        payment_date = request.POST.get('sec_payment_date')
+
+        if Flatno.objects.filter(flat=sec_flat).exists():
+            maintenance_user = Flatno.objects.get(flat=sec_flat).owner
+            flat = Flatno.objects.get(flat=sec_flat)
+
+            pi.maintenance_user = maintenance_user
+            pi.maintenance_flat = flat
+            pi.maintenance_month = maintenance_month
+            pi.maintenance_year = maintenance_year
+            pi.payment_date = payment_date
+            pi.save()
+        else:
+            return render(request, "sec-main.html", {'error': 'Flat/Wing Number does not exist'})
+        return redirect('sec_main')
+    return redirect('sec_main')
+
+
 def sec_complain(request):
     society_name = User_Detail.objects.get(user = request.user).society_name
     # complains_data = Complain.objects.filter(complain_user = users_current_society).order_by('-id')
@@ -259,3 +283,38 @@ def sec_event(request):
         sec_event_var.save()
 
     return render (request, "sec-event.html", {'events': events})
+
+def delete_event(request, id):
+    if request.method == 'POST':
+        if Event.objects.filter(pk=id).exists():
+            pi = Event.objects.get(pk=id)
+            pi.delete()
+            return redirect('sec_event')
+        else:
+            return redirect('sec_event', {'error': 'No ID'})
+    return redirect('sec_event')
+
+def update_event(request, id):
+    if request.method == 'POST':
+        if Event.objects.filter(pk=id).exists():
+            pi = Event.objects.get(pk=id)
+            pi.event_name = request.POST['event_name']
+            pi.event_description = request.POST['event_description']
+            event_start = request.POST['event_start_date']
+            event_end = request.POST['event_end_date']
+            pi.event_start_date = datetime.strptime(event_start, '%Y-%m-%dT%H:%M')
+            pi.event_end_date = datetime.strptime(event_end, '%Y-%m-%dT%H:%M')
+            pi.save()
+            print("")
+            print("")
+            print(pi.event_name)
+            print("")
+            print(pi.event_description)
+            print("")
+        return redirect('sec_event')
+    return redirect('sec_event')
+
+
+def user_profile(request):
+
+    return render (request , "user-profile.html")

@@ -64,6 +64,7 @@
                         <td class="date">{{e.event_end_date}}</td>
                         <td> <button class="select-btn" 
                             onclick="select_event(
+                                '{{e.id}}', 
                                 '{{e.event_name}}', 
                                 '{{e.event_description}}',
                                 '{{e.event_start_date}}',
@@ -88,24 +89,24 @@
         </div>
 
         <div class="sec-right-form">
-            <form method="POST" action="{% url 'sec_event' %}">
+            <form method="POST" action="{% url 'sec_event' %}" id="update_form">
 
                 {% csrf_token %}
                 <label>Name</label>
-                <input type="text" name="event_name" maxlength="100" id="event_name">
+                <input type="text" name="event_name" maxlength="100" id="event_name" placeholder="Name" required>
                 <label>Description</label>
 
-                <textarea id="event_description" name="event_description" rows="10" placeholder="Write something.." maxlength="500" required></textarea>
+                <textarea id="event_description" name="event_description" rows="10" placeholder="Event Description" maxlength="500" required></textarea>
 
                 <label>Start Date</label>
-                <input type="datetime-local" name="event_start_date" id="event_start_date">
+                <input type="datetime-local"  name="event_start_date" id="event_start_date">
                 <label>End Date</label>
                 <input type="datetime-local" name="event_end_date" id="event_end_date">
 
                 <div class="add-update">
 
                     <input type="submit" value="Add">
-                    <input type="submit" value="Update">
+                    <input type="submit" onclick="upd()" value="Update" id="update-btn" style="visibility: hidden;">
                 </div>
 
 
@@ -116,23 +117,36 @@
 
 </div>
 
-
 <script>
 
+    
     console.log("Working JS");
     var delete_id = 0;
-
+    var update_id = 0;
+    
     var dialogue_box = document.querySelector(".dialogue-box");
     var sec_container = document.querySelector(".sec-container");
-
-    var delete_form = document.getElementById('delete_form');
     
-    function select_event(name, desc, start, end) {
-        
-        console.log("Name: " + name);
-        console.log("desc: " + desc);
-        console.log("start: " + start);
-        console.log("end: " + end);
+    var delete_form = document.getElementById('delete_form');
+    var update_form = document.getElementById('update_form');
+    
+    event_name = document.getElementById("event_name");
+    event_description = document.getElementById("event_description");
+    event_start_date = document.getElementById("event_start_date");
+    event_end_date = document.getElementById("event_end_date");
+ 
+    {% if error %}
+        event_name.placeholder = "Select Something to Update";
+        event_description.placeholder = "Select Something to Update";
+        event_name.value = "";
+        event_description.value = "";
+    {% endif %}
+
+    function select_event(id, name, desc, start, end) {
+
+        console.log("Update ID is: " + id);
+        update_id = id;
+
 
         var var1 = start.split(",").map(function(item){
             return item.trim();
@@ -144,7 +158,6 @@
         var start_date = now.toISOString().slice(0,16);
         start_date = start_date.replace(start_date.substring(0,4), var1[1]);
 
-
         var var2 = end.split(",").map(function(item){
             return item.trim();
         });
@@ -155,10 +168,7 @@
         var end_date = now.toISOString().slice(0,16);
         end_date = end_date.replace(end_date.substring(0,4), var2[1]);
 
-        event_name = document.getElementById("event_name");
-        event_description = document.getElementById("event_description");
-        event_start_date = document.getElementById("event_start_date");
-        event_end_date = document.getElementById("event_end_date");
+        document.getElementById('update-btn').style.visibility = "";
 
 
         event_name.value = name;
@@ -168,14 +178,19 @@
         console.log("Ending of function");
 
     }
+
+    function upd() {
+        console.log("Update form 1st line: " + update_id);
+        document.getElementById('update_form').action = "http://127.0.0.1:8000/update_event/" + update_id +"/";
+        console.log("Updated action for update event");
+    }
      
     function del_event(id) {
         delete_id = id;
-        console.log("id generated is");
-        console.log(id);
-        // delete_form.action = "http://127.0.0.1:8000/delete_event/" + delete_id +"/";
-        console.log(delete_form.action)
-        console.log(delete_form.onsubmit)
+        console.log("delete id: " + id);
+        delete_form.action = "http://127.0.0.1:8000/delete_event/" + delete_id +"/";
+        // console.log(delete_form.action)
+        // console.log(delete_form.onsubmit)
         openBox();
     }
     

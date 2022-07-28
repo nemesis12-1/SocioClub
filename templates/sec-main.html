@@ -62,7 +62,7 @@
                         {% endif %}
  
                         
-                        <td> <button class="select-btn" onclick="select_main('{{m.maintenance_flat}}', {{m.maintenance_amount}}, {{m.maintenance_month}}, {{m.maintenance_year}})">Select</button>
+                        <td> <button class="select-btn" onclick="select_main('{{m.id}}', '{{m.maintenance_flat}}', {{m.maintenance_amount}}, {{m.maintenance_month}}, {{m.maintenance_year}})">Select</button>
                         </td>
                         <td> <button class="select-btn" onclick="del_main('{{m.id}}')">Delete</button></td>
                     </tr>
@@ -89,7 +89,7 @@
         </div>
 
         <div class="sec-right-form">
-            <form method="POST" action="{% url 'sec_main' %}">
+            <form method="POST" action="{% url 'sec_main' %}" id="update_form">
                 {% csrf_token %}
 
                 <label>Flat no</label>
@@ -99,18 +99,18 @@
                 <input type="text" name="sec_flat" id="sec_flat" placeholder="Enter Your Flat No">
                 {% endif %}
                 <label>Amount</label>
-                <input type="text" id="sec_amount">
+                <input type="text" id="sec_amount" placeholder="Amount">
                 <label>Month</label>
-                <input type="text" name="sec_month" id="sec_month">
+                <input type="text" name="sec_month" id="sec_month" placeholder="Enter Month">
                 <label>Year</label>
-                <input type="text" name="sec_year" id="sec_year">
+                <input type="text" name="sec_year" id="sec_year" placeholder="Enter Year">
                 <label>Payment Date</label>
                 <input type="datetime-local" name="sec_payment_date" id="sec_payment_date">
 
                 <div class="add-update">
 
                     <input type="submit" value="Add">
-                    <input type="submit" value="Update">
+                    <input type="submit" onclick="upd_main()" value="Update" id="update-btn" style="visibility: hidden;">
                 </div>
 
 
@@ -125,13 +125,17 @@
 
     console.log("Working JS");
     var delete_id = 0;
+    var update_id = 0;
 
     var dialogue_box = document.querySelector(".dialogue-box");
     var sec_container = document.querySelector(".sec-container");
 
     var delete_form = document.getElementById('delete_form');
+    var update_form = document.getElementById('update_form');
     
-    function select_main(flat, amount, month, year) {
+    function select_main(id, flat, amount, month, year) {
+
+        update_id = id;
 
         console.log("Beginning of function");
         sec_flat = document.getElementById("sec_flat");
@@ -140,12 +144,20 @@
         sec_year = document.getElementById("sec_year");
         sec_payment_date = document.getElementById("sec_payment_date");
 
+        document.getElementById('update-btn').style.visibility = "";
+
         sec_flat.value = flat;
         sec_amount.value = amount;
         sec_month.value = month;
         sec_year.value = year;
         console.log("Ending of function");
 
+    }
+
+    function upd_main() {
+        console.log("Update form 1st line: " + update_id);
+        document.getElementById('update_form').action = "http://127.0.0.1:8000/update_main/" + update_id +"/";
+        console.log("Updated action for update event");
     }
      
     function del_main(id) {

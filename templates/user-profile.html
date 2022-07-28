@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+{% load static %}
+{% url 'login' as login %}
+{%block titleblock%} SocioClub | User Profile {% endblock %}
+
+
+{%block cssblock%}
+<link rel="stylesheet" href="{% static 'css/user-profile.css'%}">
+<!-- <link rel="stylesheet" href="{% static 'css/global.css'%}"> -->
+{%endblock%}
+{% block mainblock %}
+
+<div class="user-profile-container">
+
+    <div class="user-profile-left">
+        <div class="user-upper">
+
+            <h3>My profile</h3>
+           
+
+        </div>
+
+        <div class="user-lower">
+
+            <div class="user-img">
+                <img src="{% static 'images/user.png' %}" alt="Illustration">
+            </div>
+
+            <div class="user-profile-details">
+
+                <h4>Name : Ashutosh Sahu</h4>
+                <h4>Username : ashu</h4>
+                <h4>Email :ashusahu145@gmail.comsasdasasdsadfafasas</h4>
+                <h4>Phone :9981237855</h4>
+                <h4>Flat No. : 22</h4>
+                <h4>Society : Hubtown Countrywood</h4>
+
+            </div>
+
+        </div>
+        <div class="user-profile-delete-btn">
+
+            <a href="#">Delete</a>
+
+        </div>
+    </div>
+
+    <div class="user-profile-right">
+          
+        <div class="user-profile-form">
+
+
+            <form action="" method="">
+                <label>Name</label>
+                <input type="text" name="user-profile-name" required>
+                <label>Email</label>
+                <input type="Email" name="user-profile-email" required>
+                <label>Phone No.</label>
+                <input type="tel" name="user-profile-phone" pattern="[0-9]{10}" required>
+                <label for="">Confirm Password</label>
+                <input type="password" name="confirm-password">
+                <input type="Submit" value="Edit">
+    
+    
+            </form>
+        </div>
+
+
+    </div>
+
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+{% endblock %}
