@@ -10,6 +10,21 @@
 {%endblock%}
 {% block mainblock %}
 
+<div class="dialogue-box">
+    <div class="box">
+        <h4>Are you sure you want to delete this Account</h4>
+            <form method="POST" action="{% url 'delete_account' %}" class="box-btn" onsubmit="event.preventDefault();" id="delete_form">
+                {% csrf_token %}
+
+                <button onclick="delete_account()">YES</button>
+                <button onclick="closeBox()">NO</button>
+
+            </form>
+    </div>
+</div>
+
+
+
 <div class="user-profile-container">
 
     <div class="user-profile-left">
@@ -28,29 +43,30 @@
 
             <div class="user-profile-details">
 
-                <h4>Name : Ashutosh Sahu</h4>
-                <h4>Username : ashu</h4>
-                <h4>Email :ashusahu145@gmail.comsasdasasdsadfafasas</h4>
-                <h4>Phone :9981237855</h4>
-                <h4>Flat No. : 22</h4>
-                <h4>Society : Hubtown Countrywood</h4>
+                <h4 style="font-size: bolder;" >Name : {{request.user.first_name}} {{request.user.last_name}}</h4>
+                <h4>Username : {{request.user}}</h4>
+                <h4>Email : {{request.user.email}}</h4>
+                <h4>Phone : {{phone}}</h4>
+                <h4>Flat No. : {{flat_no}}</h4>
+                <h4>Society : {{society_name}}</h4>
 
             </div>
 
         </div>
         <div class="user-profile-delete-btn">
 
-            <a href="#">Delete</a>
+            <a onclick="openBox()">Delete</a>
 
         </div>
     </div>
 
     <div class="user-profile-right">
           
+        <h4>Edit your Account</h4>
         <div class="user-profile-form">
-
-
-            <form action="" method="">
+           
+            <form action="{% url 'user_profile' %}" method="POST">
+                {% csrf_token %}
                 <label>Name</label>
                 <input type="text" name="user-profile-name" required>
                 <label>Email</label>
@@ -58,7 +74,11 @@
                 <label>Phone No.</label>
                 <input type="tel" name="user-profile-phone" pattern="[0-9]{10}" required>
                 <label for="">Confirm Password</label>
+                {% if error %}
+                <input class="error" placeholder="{{error}}" type="password" name="confirm-password">
+                {% else %}
                 <input type="password" name="confirm-password">
+                {% endif %}
                 <input type="Submit" value="Edit">
     
     
@@ -69,12 +89,33 @@
     </div>
 
 
-
-
 </div>
 
 
+<script>
+    
+var dialogue_box = document.querySelector(".dialogue-box");
+var user_container = document.querySelector(".user-profile-container");
+var delete_form = document.getElementById('delete_form');
 
+
+function openBox() {
+        console.log("Open box");
+        dialogue_box.style.transform = "translate(-50% , -50%) scale(1)";
+        user_container.classList.add("blur");
+    }
+    
+function closeBox() {
+        console.log("Close box");
+        dialogue_box.style.transform = "translate(-50% , -50%) scale(0)";
+        user_container.classList.remove("blur");
+    }
+
+function delete_account() {
+    delete_form.submit();
+}
+
+</script>
 
 
 

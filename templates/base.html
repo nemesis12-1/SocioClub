@@ -1,8 +1,12 @@
 {% url 'index' as index %}
 {% url 'complain' as complain %}
+{% url 'add_complain' as add_complain %}
 {% url 'maintenance' as maintenance %}
 {% url 'contact_us' as contact_us %}
 {% url 'event' as event %}
+{% url 'sec_main' as sec_main %}
+{% url 'sec_event' as sec_event %}
+{% url 'sec_complain' as sec_complain %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -16,15 +20,15 @@
     <title>{%block titleblock%} Navbar base {%endblock%}</title>
 
     <link rel="stylesheet" href="{% static 'css/nav.css'%}">
-  
-    {%block cssblock%}  {%endblock%}
 
-   
+    {%block cssblock%} {%endblock%}
 
 
     <link
         href="https://fonts.googleapis.com/css2?family=Cantarell:wght@700&family=Montserrat:wght@300&family=Oswald:wght@500&family=Source+Code+Pro&display=swap"
         rel="stylesheet">
+
+
 </head>
 
 <body>
@@ -55,10 +59,16 @@
         </div>
         <div class="right">
             <a href="{% url 'index' %}" class="{% if request.path == index %} active {%endif%}">Home</a>
-            <a href="{% url 'complain' %}" class="{% if request.path == complain %} active {%endif%}">Complain</a>
+            {% if user_type.user_type == 2 %}
+            <a href="{% url 'sec_complain' %}" class="{% if request.path == sec_complain %} active {%endif%}">Complain</a>
+            <a href="{% url 'sec_event' %}" class="{% if request.path == sec_event %} active {%endif%}">Event</a>
+            <a href="{% url 'sec_main' %}" class="{% if request.path == sec_main %} active {%endif%}">Maintenance</a>
+            {% else %}
+            <a href="{% url 'complain' %}" class="{% if request.path == complain or request.path == add_complain %} active {%endif%}">Complain</a>
             <a href="{% url 'event' %}" class="{% if request.path == event %} active {%endif%}">Event</a>
             <a href="{% url 'maintenance' %}"
                 class="{% if request.path == maintenance %} active {%endif%}">Maintenance</a>
+            {% endif %}
             <a href="{% url 'contact_us' %}" class="{% if request.path == contact_us %} active {%endif%}">Contact Us</a>
             <div class="user-profile" onclick="openSideNav()">
                 <img src="{% static 'images/user.png' %}" alt="Illustration">
@@ -75,34 +85,21 @@
             <h6>Name : {{request.user.first_name}} {{request.user.last_name}}</h6>
             <h6>Username : {{request.user}}</h6>
             <h6>Email : {{request.user.email}}</h6>
-            <!-- <h6>Phone No. : {{phone}}</h6>
-            <h6>Flat/Wing No. : {{user.flat}}</h6>
-            <h6>Society name: {{user.soceity_name}} </h6> -->
 
-            <div class="btn1">
+            <div class="user-btn">
+                {% if request.user.is_authenticated %}
+                <a href="{% url 'user_profile' %}">User Profile</a>
                 <a href="{% url 'logout' %}">Logout</a>
-            </div>
-
-            <div class="btn1">
+                <!-- {% if user_type.user_type == 2 %}
+                <h3>Secretary Options</h3>
+                <a href="{% url 'sec_main' %}">Secretary Maintenance</a>
+                <a href="{% url 'sec_complain' %}">Secretary Complain</a>
+                <a href="{% url 'sec_event' %}">Secretary Event</a>
+                {% endif %} -->
+                {% else %}
                 <a href="{% url 'signup' %}">Sign up </a>
-
+                {% endif %}
             </div>
-            <div class="btn1">
-                
-                <a href="{% url 'user_profile' %}" >user-profile</a><br>
-
-            </div>
-
-
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <a href="{% url 'sec_main' %}" >sec main</a><br>
-            <a href="{% url 'sec_complain' %}" >sec complain</a><br>
-            <a href="{% url 'sec_event' %}" >sec event</a><br>
 
         </div>
 

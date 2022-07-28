@@ -9,7 +9,22 @@ body {
     height: 100vh;
     display: flex;
     flex-direction: column;
+}
 
+nav .right a {
+    color: black;
+}
+
+nav .right .active {
+    border-bottom: 2px solid #5cdb95;
+}
+
+nav .right a::before {
+    background: #5cdb95;
+}
+
+nav .right a:hover::before {
+    border: 2px solid #5cdb95;
 }
 
 .maintenance-container {
@@ -79,7 +94,6 @@ body {
     margin: 2rem;
     width: 80%;
     padding: 0.5rem;
-    background-color: red;
     /* max-width: 10%; */
 
 }
@@ -90,59 +104,6 @@ body {
 }
 
 
-/*
-
-.mt-right form label {
-    font-size: 1.2rem;
-    padding: 0.5rem 0;
-}
-
-
-
-.mt-right .mt-right-form form input[type=date],
-input[type=text] {
-    background-color: rgba(255, 255, 255, 0.07);
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    margin: 6px 0px;
-    padding: 10px 5px;
-    font-size: 1rem;
-
-
-}
-
-.mt-right .mt-right-form select {
-    background-color: rgba(255, 255, 255, 0.07);
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    margin: 6px 0px;
-    font-size: 1rem;
-    padding: 10px 5px;
-}
-
-.mt-right .mt-right-form form input[type=submit] {
-    width: 70%;
-    background-color: #ff436a;
-    color: white;
-    font-weight: bolder;
-    padding: 0.5rem 1rem;
-    border: none;
-    margin: auto;
-    margin-bottom: 1rem;
-    border-radius: 4px;
-    cursor: pointer;
-    margin-top: 20px;
-    transition: 0.5s ease;
-    font-size: 1rem;
-}
-
-.mt-right .mt-right-form form input[type=submit]:hover {
-
-    /* font-size: 20px; */
-    /* letter-spacing: 3px;
-    color: black;
-
-} */ 
 
 .mt-left h3 {
 
@@ -156,7 +117,6 @@ input[type=text] {
 }
 
 table {
-    /* margin-top: 10px; */
     border-collapse: collapse;
     width: 100%;
     font-family: 'Montserrat', sans-serif;
@@ -205,28 +165,16 @@ tr:nth-child(even) {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 }
 
-/*
--- TO DO LIST --
-button animation
-button size fix
-
-
-*/
-
-
-
 ::-webkit-scrollbar {
     width: 10px;
   }
   
-  /* Track */
   ::-webkit-scrollbar-track {
     box-shadow: inset 0 0 5px grey; 
-    /* border-radius: 10px; */
+    
   }
-   
-  /* Handle */
+
   ::-webkit-scrollbar-thumb {
     background: #232325 ; 
-    /* border-radius: 10px; */
+    
   }

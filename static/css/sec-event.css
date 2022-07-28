@@ -174,7 +174,7 @@ thead th{
     top: 0;
     background-color: black;
 }
-td,
+
 th {
 
     border: 2px soild red;
@@ -183,6 +183,11 @@ th {
     letter-spacing: 2px;
     
 }
+td{
+    padding: 8px;
+    text-align: left;
+}
+
 
 tr:nth-child(even) {
 

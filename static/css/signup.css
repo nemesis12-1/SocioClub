@@ -79,7 +79,7 @@ input[type=text], input[type="tel"] {
 }
 
 input[type=submit], input[type=button], button {
-    width: 50%;
+    /* width: 50%; */
     background-color: #8267ff;
     color: white;
     font-weight: bolder;
@@ -91,11 +91,9 @@ input[type=submit], input[type=button], button {
     margin-top: 20px;
 }
 
-input[type=submit]:hover {
+input[type=submit]:hover, input[type=button]:hover {
     background-color: #8367ff99;
     color: black;
-    letter-spacing: 2px;
-    transition: 0.1s ease;
 }
 
 .tandc {
@@ -167,4 +165,18 @@ width: 100%;
 
     color: red;
 
+}
+
+
+.next-btn{
+    width: 30%;
+}
+
+.back-btn{
+    width: 30%;
+
+
+}
+.create-btn{
+    width: 30%;
 }

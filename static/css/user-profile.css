@@ -16,12 +16,17 @@ body {
 .user-profile-container{
     display: flex;
     flex: 1 0 0;
+    /* filter: blur(4px); */
+   
    /* background-color: #232325; */
     /* color: black; */
 }
 
 .user-profile-left{
     width: 60%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     /* text-align: center; */
     /* background-color: red; */
 }
@@ -110,17 +115,19 @@ overflow-x: visible;
 }
    
 
-
-
-
 .user-profile-right{
     width: 40%;
     /* background-color: blue  ; */
     color: black;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
 
+}
+.user-profile-right h4{
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
 }
 
 .user-profile-form{
@@ -181,4 +188,47 @@ input[type=submit]:hover {
     letter-spacing: 2px;
     color: black;
 
+}
+
+
+
+.dialogue-box{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50% , -50%) scale(0);
+    z-index: 4;
+    /* display: none; */
+    transition: 0.2s ease-in-out;
+    /* transform: scale(1); */
+    
+}
+.box{
+    background-color: antiquewhite;
+    /* height: 20rem;
+    width: 20rem; */
+    padding: 1rem;
+    color: black;
+    
+    /* transition: 2s ease-in-out; */
+    border-radius: 1rem;
+}
+
+.box h4{
+    color: black;
+}
+.box-btn{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    margin-top: 2rem;
+}
+.box button{
+    padding: 0.5rem;
+    font-size: 1rem;
+    color: black;
+    border-radius: 0.5rem;
+    border: 1px solid transparent;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    
 }

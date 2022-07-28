@@ -143,12 +143,12 @@ height: 2rem;
 }
 
 .user-profile-data{
-    
-
     color: black;
     margin-top: 7rem;
     width: 80%;
     padding: 5%;
+    display: flex;
+    flex-direction: column;
     /* background-color: blueviolet; */
     
 }
@@ -159,17 +159,29 @@ height: 2rem;
     width: 100%;
 }
 
-.btn1{
-    margin-top: 3rem; 
-    text-align: center;   
+.user-btn {
+    /* background-color: red; */
+    height: auto; 
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1.5rem;
+    text-align: center;
 }
 
-.btn1 a {
+.btn1{
+    width: 100%;
+    background-color: aqua;
+    text-align: center;  
+}
+
+.user-btn a {
     background-color: black;
+    width: 100%;
     color: white;
     font-size: 1rem;
-    padding: 0.5rem;
-    /* border: 1px solid white; */
+    padding: 0.5rem 1rem;
     border-radius: 0.5rem;
     text-decoration: none;
     box-shadow: 0 2px 8px -2px rgb(0 0 0 / 20%);
@@ -177,9 +189,8 @@ height: 2rem;
 
 }
 
-.btn1 a:hover{
-letter-spacing: 2px;
-/* padding: 1rem; */
+.user-btn a:hover{
+
 color: black;
 background-color: white;
 
@@ -234,4 +245,14 @@ background-color: white;
 .blur {
     filter: blur(2px);
     pointer-events: none; 
+}
+
+.secretary-div h3{
+
+    text-align: center;
+    margin-top: 1rem;
+}
+
+.error::placeholder {
+    color: red;
 }

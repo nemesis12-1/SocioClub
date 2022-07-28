@@ -174,14 +174,19 @@ thead th{
     top: 0;
     background-color: black;
 }
-td,
+
 th {
 
-    border: 2px soild red;
+    /* border: 2px soild red; */
     text-align: center;
     padding: 8px;
     letter-spacing: 2px;
 }
+td{
+    padding: 8px;
+    text-align: left;
+}
+
 
 tr:nth-child(even) {
 
@@ -252,3 +257,20 @@ textarea {
     color: white;
     font-size: 1rem;
 }
+
+.th-1 , .th-2{
+
+    width: 10%;
+   
+}
+
+.th-3 , .th-4{
+
+    width: 30%;
+  
+}
+
+.th-5{
+    width: 10%;
+}
+

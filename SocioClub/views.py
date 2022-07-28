@@ -6,13 +6,17 @@ from django.contrib.auth import authenticate, login, logout
 from user_data.models import Maintenance, Society, User_Detail, Complain, Contact, Event, Flatno
 from datetime import date, datetime
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.hashers import check_password
+import time
 
 
 def index(request):
 
     if request.user.is_authenticated:
         user_firstname = User.objects.get(username=request.user).first_name
-        return render(request, "index.html", {'user_firstname': user_firstname})
+        user_type = User_Detail.objects.get(user=request.user)
+
+        return render(request, "index.html", {'user_firstname': user_firstname, 'user_type': user_type})
     return render(request, "index.html")
 
 
@@ -104,6 +108,7 @@ def log_out(request):
 
 
 def contact_us(request):
+    user_type = User_Detail.objects.get(user=request.user)
     if request.method == "POST":
         contact_subject = request.POST['contact_subject']
         contact_description = request.POST['contact_description']
@@ -115,9 +120,9 @@ def contact_us(request):
         )
 
         contact.save()
-        return render(request, "contact.html", {'success': True})
+        return render(request, "contact.html", {'success': True, 'user_type': user_type})
 
-    return render(request, "contact.html")
+    return render(request, "contact.html", {'user_type':user_type})
 
 
 @login_required(login_url='login')
@@ -176,9 +181,9 @@ def event(request):
     for event in events:
         start = event.event_start_date.strftime("%d/%m/%Y %H:%M")
         end = event.event_end_date.strftime("%d/%m/%Y %H:%M")
-        if now >= start and now <=end:
+        if time.strptime(now, "%d/%m/%Y %H:%M") >= time.strptime(start, "%d/%m/%Y %H:%M") and time.strptime(now, "%d/%m/%Y %H:%M") <= time.strptime(end, "%d/%m/%Y %H:%M"):
             ongoing_event[event] = event.event_name
-        elif now<=start:
+        elif time.strptime(now, "%d/%m/%Y %H:%M") <= time.strptime(start, "%d/%m/%Y %H:%M"):
             upcoming_event[event] = event.event_name
 
     return render(request, "event.html", {'ongoing_event': ongoing_event, 'upcoming_event': upcoming_event})
@@ -189,13 +194,18 @@ def test(request):
     return render(request, "test.html", {'maintenance_data': maintenance_data})
 
 def sec_main(request):
+    user_type = User_Detail.objects.get(user=request.user)
     society_name = User_Detail.objects.get(user=request.user).society_name
-    maintenance_data = Maintenance.objects.filter(society_name=society_name)
+    society_amount = Society.objects.get(society_name=society_name).maintenance_rate
+    maintenance_data = Maintenance.objects.filter(society_name=society_name).order_by('-id')
+
     if request.method == 'POST':
+
 
         sec_flat = request.POST['sec_flat']
         maintenance_month = request.POST['sec_month']
         maintenance_year = request.POST['sec_year']
+        maintenance_amount = request.POST['sec_amount']
         payment_date = request.POST.get('sec_payment_date')
         
 
@@ -206,16 +216,16 @@ def sec_main(request):
                 society_name=society_name, 
                 maintenance_user = maintenance_user,
                 maintenance_flat = flat,
-                maintenance_amount = 5000,
+                maintenance_amount = maintenance_amount,
                 maintenance_month = maintenance_month, 
                 maintenance_year = maintenance_year, 
                 payment_date = payment_date
             )
             m.save()
         else:
-            return render(request, "sec-main.html", {'maintenance_data': maintenance_data ,'error': 'Flat/Wing Number does not exist'})
+            return render(request, "sec-main.html", {'maintenance_data': maintenance_data ,'error': 'Flat/Wing Number does not exist', 'user_type':user_type, 'society_amount':society_amount})
 
-    return render(request, "sec-main.html", {'maintenance_data': maintenance_data})
+    return render(request, "sec-main.html", {'maintenance_data': maintenance_data, 'user_type':user_type, 'society_amount':society_amount})
 
 def delete_main(request, id):
     if request.method == 'POST':
@@ -244,24 +254,32 @@ def update_main(request, id):
             pi.payment_date = payment_date
             pi.save()
         else:
-            return render(request, "sec-main.html", {'error': 'Flat/Wing Number does not exist'})
+            return redirect('sec_main', {'error': 'Flat/Wing Number does not exist'})
         return redirect('sec_main')
     return redirect('sec_main')
 
 
 def sec_complain(request):
+    user_type = User_Detail.objects.get(user=request.user)
     society_name = User_Detail.objects.get(user = request.user).society_name
-    # complains_data = Complain.objects.filter(complain_user = users_current_society).order_by('-id')
-    complains_data = Complain.objects.filter(society_name=society_name).order_by('-complain_date')
-    print("")
-    print("")
-    print(complains_data)
-    print("")
-    print("")
-    return render (request , "sec-complain.html", {'complains':complains_data})
+    complains_data = Complain.objects.filter(society_name=society_name).order_by('-id')
+    return render (request , "sec-complain.html", {'complains':complains_data, 'user_type':user_type})
+
+def update_complain(request, id):
+    if request.method == 'POST':
+        complain_solution = request.POST['complain_solution']
+
+        pi = Complain.objects.get(pk=id)
+
+        pi.complain_solution = complain_solution
+        pi.save()
+
+        return redirect('sec_complain')
+    return redirect('sec_complain')
 
 
 def sec_event(request):
+    user_type = User_Detail.objects.get(user=request.user)
     society_name = User_Detail.objects.get(user=request.user).society_name
     events = Event.objects.filter(society_name = society_name).order_by('-event_start_date')
 
@@ -282,7 +300,7 @@ def sec_event(request):
         )
         sec_event_var.save()
 
-    return render (request, "sec-event.html", {'events': events})
+    return render (request, "sec-event.html", {'events': events, 'user_type':user_type})
 
 def delete_event(request, id):
     if request.method == 'POST':
@@ -305,16 +323,48 @@ def update_event(request, id):
             pi.event_start_date = datetime.strptime(event_start, '%Y-%m-%dT%H:%M')
             pi.event_end_date = datetime.strptime(event_end, '%Y-%m-%dT%H:%M')
             pi.save()
-            print("")
-            print("")
-            print(pi.event_name)
-            print("")
-            print(pi.event_description)
-            print("")
+            # print("")
+            # print("")
+            # print(pi.event_name)
+            # print("")
+            # print(pi.event_description)
+            # print("")
         return redirect('sec_event')
     return redirect('sec_event')
 
 
 def user_profile(request):
+    user_type = User_Detail.objects.get(user=request.user)
+    society_name = User_Detail.objects.get(user=request.user).society_name
+    phone = User_Detail.objects.get(user = request.user).phone
+    flat_no =User_Detail.objects.get(user = request.user).flat
+    if request.method == 'POST':
+        user_name = request.POST.get('user-profile-name')
+        user_email = request.POST.get('user-profile-email')
+        user_phone = request.POST.get('user-profile-phone')
+        password = request.POST.get('confirm-password')
+        matchpass = check_password(password, request.user.password)
+        if matchpass:
+            fullname = user_name
+            fullname.split()
+            firstname = fullname.split()[0]
+            lastname = fullname.split()[-1]
 
-    return render (request , "user-profile.html")
+            user = User.objects.get(id=request.user.id)
+            user.first_name = firstname
+            user.last_name = lastname
+            user.email = user_email
+            user_details = User_Detail.objects.get(user=request.user)
+            user_details.phone = user_phone
+
+            user.save()
+            user_details.save()
+        else:
+            return render( request , "user-profile.html" ,{'error':'Password is incorrect', 'society_name': society_name , 'phone': phone, 'flat_no': flat_no, 'user_type':user_type })
+    return render( request , "user-profile.html" ,{'society_name': society_name , 'phone': phone, 'flat_no': flat_no, 'user_type':user_type })
+
+def delete_account(request):
+    if request.method == 'POST':
+        delete_user = User.objects.get(username=request.user)
+        delete_user.delete()
+    return redirect('index')

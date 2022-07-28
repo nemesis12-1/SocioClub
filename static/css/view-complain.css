@@ -10,11 +10,8 @@ body {
     display: flex;
     flex-direction: column;
     height: 100vh;
-    background-color: #232325;
-    /* background: linear-gradient(125deg, #ee7752, #e73c7e, #23a6d5, #23d5ab); */
-    /* background: linear-gradient(125deg, #ee7652cf, #e73c7ecc, #23a5d5cf, #23d5abce); */
-    background-size: 400% 400%;
-    animation: gradient 10s ease infinite;
+    background-image: url('../images/complain-bg.jpg');
+    background-size:cover;
 }
 
 nav .right a {
@@ -28,11 +25,12 @@ nav .right .active {
 
 nav .right a::before {
     /* background: linear-gradient(90deg, #ee7752, #e73c7e, #23a6d5, #23d5ab); */
-    background: transparent;
+    background: rgba(255, 255, 255, 0.11);
+
 }
 
 nav .right a:hover::before {
-    border: 2px solid white;
+    border: 1px solid white;
 }
 
 .view-complain-container {
@@ -68,8 +66,8 @@ nav .right a:hover::before {
     background: rgba(255, 255, 255, 0.11);
     border-radius: 16px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-    backdrop-filter: blur(4.6px);
-    -webkit-backdrop-filter: blur(4.6px);
+    backdrop-filter: blur(50px);
+    -webkit-backdrop-filter: blur(50px);
     border: 1px solid rgba(255, 255, 255, 0.3);
     padding: 1rem;
     margin-top: 1rem;
@@ -118,7 +116,7 @@ td {
 	border: 1px solid #ccc; 
 	text-align: center; 
 	font-size: 18px;
-    color: rgb(255, 255, 255);
+    color: black;
     padding: 1rem 1rem;
 	}
 

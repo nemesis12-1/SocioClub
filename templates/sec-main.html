@@ -78,15 +78,6 @@
     </div>
 
     <div class="sec-right">
-        <div class="sec-right-text">
-
-            
-            
-            <!-- <p>** If the Maintenance Amount is already paid , and it's not showing in the history table kindly request to
-                the secratory by submitting the below form. **</p>
-            <h5>Thanks for the Consideration</h5> -->
-
-        </div>
 
         <div class="sec-right-form">
             <form method="POST" action="{% url 'sec_main' %}" id="update_form">
@@ -94,16 +85,16 @@
 
                 <label>Flat no</label>
                 {% if error %}
-                <input type="text" name="sec_flat" id="sec_flat" placeholder="Flat Does Not Exist">
+                <input type="text" class="error" name="sec_flat" id="sec_flat" placeholder="Flat Does Not Exist" required>
                 {% else %}
-                <input type="text" name="sec_flat" id="sec_flat" placeholder="Enter Your Flat No">
+                <input type="text" name="sec_flat" id="sec_flat" placeholder="Enter Your Flat No" required>
                 {% endif %}
                 <label>Amount</label>
-                <input type="text" id="sec_amount" placeholder="Amount">
+                <input type="text" id="sec_amount" name="sec_amount" placeholder="Amount" value="{{society_amount}}" required>
                 <label>Month</label>
-                <input type="text" name="sec_month" id="sec_month" placeholder="Enter Month">
+                <input type="text" name="sec_month" id="sec_month" placeholder="Enter Month" required>
                 <label>Year</label>
-                <input type="text" name="sec_year" id="sec_year" placeholder="Enter Year">
+                <input type="text" name="sec_year" id="sec_year" placeholder="Enter Year" required>
                 <label>Payment Date</label>
                 <input type="datetime-local" name="sec_payment_date" id="sec_payment_date">
 

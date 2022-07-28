@@ -177,7 +177,11 @@ thead th{
     top: 0;
     background-color: black;
 }
-td,
+td{
+    padding: 8px;
+    text-align: left;
+}
+
 th {
 
     border: 2px soild red;
@@ -284,3 +288,9 @@ button size fix
 
     color: rgba(255, 255, 255, 0.74);
     }
+
+.error::placeholder {
+        color: rgb(255, 255, 255);
+        background-color: black;
+        text-align: center;
+}

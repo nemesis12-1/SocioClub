@@ -5,7 +5,7 @@
 
 
 {%block cssblock%}
-<link rel="stylesheet" href="{% static 'css/sec-complain.css'%}"> 
+<link rel="stylesheet" href="{% static 'css/sec-complain.css'%}">
 <!-- <link rel="stylesheet" href="{% static 'css/global.css'%}"> -->
 {%endblock%}
 {% block mainblock %}
@@ -24,16 +24,14 @@
                 <thead>
 
                     <tr>
-                        <th>Date</th>
-                        <th>Flat No. </th>
-                        <th>Complain Description </th>
-                        <th>Status</th>
-                        <th>Complain Type</th>
-                        <!-- <th>Payment Date</th> -->
-                        <th></th>
+                        <th class="th-1">Date</th>
+                        <th class="th-2">Flat No. </th>
+                        <th class="th-3">Complain Description </th>
+                        <th class="th-4">Solution</th>
+                        <th class="th-5">Complain Type</th>
                         <th></th>
                     </tr>
-                    
+
                 </thead>
                 <!-- {% for m in maintenance_data %}
             <tr>
@@ -51,34 +49,36 @@
             </tr>
 
             {% endfor %} -->
-            <tbody>
+                <tbody>
 
-                {%if complains%}
+                    {%if complains%}
 
-                {% for c in complains %}
-                <tr>
-                    <td data-column="Date">{{c.complain_date}}</td>
-                    <td data-column="Complain Name">{{c.flat}}</td>
-                    <td data-column="Complain Description">{{c.complain_description}}</td>
-                    <td data-column="Solution">{{c.complain_status}}</td>
-                    <td data-column="Complain Type">{{c.complain_type}}</td>
-                    <td> <button class="select-btn green">Select</button></td>
-                    <!-- <td> <button class="select-btn red ">Delete</button></td> -->
-                </tr>
-                {% endfor %}
+                    {% for c in complains %}
+                    <tr>
+                        <td data-column="Date">{{c.complain_date}}</td>
+                        <td data-column="Flat Name">{{c.flat}}</td>
+                        <td data-column="Complain Description">{{c.complain_description}}</td>
+                        <td data-column="Solution">{{c.complain_solution}}</td>
+                        <td data-column="Complain Type">{{c.complain_type}}</td>
+                        <td> <button class="select-btn"
+                                onclick="select_complain('{{c.id}}','{{c.complain_date}}' , '{{c.flat}}' ,'{{c.complain_type}}')">Select</button>
+                        </td>
+                        <!-- <td> <button class="select-btn red ">Delete</button></td> -->
+                    </tr>
+                    {% endfor %}
 
-                {%else%}
+                    {%else%}
 
-                <td data-column="Date">No Records Found</td>
-                <td data-column="Complain Name">No Records Found</td>
-                <td data-column="Complain Type">No Records Found</td>
-                <td data-column="Status">No Records Found</td>
-                <td data-column="Status">No Records Found</td>
+                    <td data-column="Date">No Records Found</td>
+                    <td data-column="Flat no">No Records Found</td>
+                    <td data-column="Complain Decription">No Records Found</td>
+                    <td data-column="Solution">No Records Found</td>
+                    <td data-column="Complain Type">No Records Found</td>
 
 
-                {%endif%}
-                
-            </tbody>
+                    {%endif%}
+
+                </tbody>
 
 
             </table>
@@ -95,22 +95,24 @@
         </div>
 
         <div class="sec-right-form">
-            <form action="">
+            <form action="{% url 'sec_complain' %}" method="POST" id="update_form">
+                {% csrf_token %}
 
                 <label>Date</label>
-                <input type="text" placeholder="Date" readonly>
+                <input type="text" placeholder="Date" name="complain_date" id="complain_date" readonly>
                 <label>Flat No.</label>
-                <input type="text" placeholder="Flat No." readonly>
+                <input type="text" placeholder="Flat No." name="complain_flat" id="complain_flat" readonly>
                 <label>Complain Type</label>
-                <input type="text" placeholder="Complain type" readonly>
+                <input type="text" placeholder="Complain type" name="complain_type" id="complain_type" readonly> 
                 <label>Solution</label>
-                <textarea id="complain-solution" name="complain-solution" rows="10" placeholder="Complain Solution" maxlength="500" required></textarea>
+                <textarea id="complain_solution" name="complain_solution" rows="10" placeholder="Complain Solution"
+                    maxlength="500" required  ></textarea>
                 <!-- <label>Payment Date</label>
                 <input type="text"> -->
 
                 <div class="add-update">
 
-                    <input type="submit" value="Add">
+                    <!-- <input type="submit" value="Add"> -->
                     <input type="submit" value="Update">
                 </div>
 
@@ -121,6 +123,34 @@
     </div>
 
 </div>
+
+<script>
+
+    var update_id = 0;
+
+    console.log("Working js");
+
+    complain_date = document.getElementById("complain_date");
+    complain_flat = document.querySelector("#complain_flat");
+    complain_type = document.querySelector("#complain_type");
+
+
+    function select_complain(id, date, flat, type) {
+
+        update_id = id;
+
+        console.log("Update ID is: " + update_id)
+
+
+        complain_date.value = date;
+        complain_flat.value = flat;
+        complain_type.value = type;
+
+        document.getElementById("update_form").action = "http://127.0.0.1:8000/update_complain/" + update_id +"/";
+        console.log(document.getElementById("update_form").action);
+
+    }
+</script>
 
 <!-- <h1>
     Events
