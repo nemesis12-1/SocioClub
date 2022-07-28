@@ -1,12 +1,11 @@
 {% extends "base.html" %}
 {% load static %}
 {% url 'login' as login %}
-{%block titleblock%} SocioClub | Sec Complain {% endblock %}
+{%block titleblock%} SocioClub | Secretary Complain {% endblock %}
 
 
 {%block cssblock%}
 <link rel="stylesheet" href="{% static 'css/sec-complain.css'%}">
-<!-- <link rel="stylesheet" href="{% static 'css/global.css'%}"> -->
 {%endblock%}
 {% block mainblock %}
 
@@ -33,22 +32,7 @@
                     </tr>
 
                 </thead>
-                <!-- {% for m in maintenance_data %}
-            <tr>
-                <td>{{flat}}</td>
-                <td>option1</td>
-                <td>{{m.maintenance_month}}</td>
-                <td>{{m.maintenance_year}}</td>
-
-                {% if m.payment_date == "" %}
-                    <td>Not Paid</td>
-                {% else %}
-                    <td>{{m.payment_date}}</td>
-                {% endif %}
-
-            </tr>
-
-            {% endfor %} -->
+              
                 <tbody>
 
                     {%if complains%}
@@ -63,7 +47,6 @@
                         <td> <button class="select-btn"
                                 onclick="select_complain('{{c.id}}','{{c.complain_date}}' , '{{c.flat}}' ,'{{c.complain_type}}')">Select</button>
                         </td>
-                        <!-- <td> <button class="select-btn red ">Delete</button></td> -->
                     </tr>
                     {% endfor %}
 
@@ -88,10 +71,7 @@
 
     <div class="sec-right">
         <div class="sec-right-text">
-            <!-- <p>** If the Maintenance Amount is already paid , and it's not showing in the history table kindly request to
-                the secratory by submitting the below form. **</p>
-            <h5>Thanks for the Consideration</h5> -->
-
+          
         </div>
 
         <div class="sec-right-form">
@@ -107,12 +87,10 @@
                 <label>Solution</label>
                 <textarea id="complain_solution" name="complain_solution" rows="10" placeholder="Complain Solution"
                     maxlength="500" required  ></textarea>
-                <!-- <label>Payment Date</label>
-                <input type="text"> -->
+                
 
                 <div class="add-update">
 
-                    <!-- <input type="submit" value="Add"> -->
                     <input type="submit" value="Update">
                 </div>
 
@@ -128,8 +106,6 @@
 
     var update_id = 0;
 
-    console.log("Working js");
-
     complain_date = document.getElementById("complain_date");
     complain_flat = document.querySelector("#complain_flat");
     complain_type = document.querySelector("#complain_type");
@@ -139,41 +115,14 @@
 
         update_id = id;
 
-        console.log("Update ID is: " + update_id)
-
-
         complain_date.value = date;
         complain_flat.value = flat;
         complain_type.value = type;
 
-        document.getElementById("update_form").action = "http://127.0.0.1:8000/update_complain/" + update_id +"/";
-        console.log(document.getElementById("update_form").action);
+        document.getElementById("update_form").action = "{% url 'index' %}"+"update_complain/" + update_id +"/";
 
     }
 </script>
-
-<!-- <h1>
-    Events
-</h1>
-<form method="POST" ">
-    {% csrf_token %}
-
-    <input type="text" placeholder="Name" name="event-name">
-    <input type="number" placeholder="Decription" name="event-desc">
-    <input type="number" placeholder="Start Date" name="event-start-date">
-    <input type="text" placeholder="End Date" name="event-end-date" >
-    <input type="submit">
-</form>
-
-<h1>Complain</h1>
-<form method="POST" %}">
-    {% csrf_token %}
-
-    <input type="text" placeholder="Status" name="complain-status">
-    
-    <input type="submit">
-</form> -->
-
 
 
 {% endblock %}

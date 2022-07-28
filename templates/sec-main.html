@@ -4,7 +4,7 @@
 {% url 'index' as index %}
 {% url 'delete_main' as delete_main %}
 
-{%block titleblock%} SocioClub | Secretary {% endblock %}
+{%block titleblock%} SocioClub | Secretary Maintenance{% endblock %}
 
 
 {%block cssblock%}
@@ -114,7 +114,6 @@
 
 <script>
 
-    console.log("Working JS");
     var delete_id = 0;
     var update_id = 0;
 
@@ -128,7 +127,6 @@
 
         update_id = id;
 
-        console.log("Beginning of function");
         sec_flat = document.getElementById("sec_flat");
         sec_amount = document.getElementById("sec_amount");
         sec_month = document.getElementById("sec_month");
@@ -141,23 +139,16 @@
         sec_amount.value = amount;
         sec_month.value = month;
         sec_year.value = year;
-        console.log("Ending of function");
 
     }
 
     function upd_main() {
-        console.log("Update form 1st line: " + update_id);
         document.getElementById('update_form').action = "http://127.0.0.1:8000/update_main/" + update_id +"/";
-        console.log("Updated action for update event");
     }
      
     function del_main(id) {
         delete_id = id;
-        console.log("id generated is");
-        console.log(id);
         delete_form.action = "http://127.0.0.1:8000/delete_main/" + delete_id +"/";
-        console.log(delete_form.action)
-        console.log(delete_form.onsubmit)
         openBox();
     }
     
@@ -172,8 +163,6 @@
     }
 
     function del() {
-        console.log("Actually deleting");
-        console.log(delete_id);
         delete_form.submit();
         closeBox();
     }

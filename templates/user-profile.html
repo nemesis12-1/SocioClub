@@ -6,7 +6,6 @@
 
 {%block cssblock%}
 <link rel="stylesheet" href="{% static 'css/user-profile.css'%}">
-<!-- <link rel="stylesheet" href="{% static 'css/global.css'%}"> -->
 {%endblock%}
 {% block mainblock %}
 
@@ -100,13 +99,11 @@ var delete_form = document.getElementById('delete_form');
 
 
 function openBox() {
-        console.log("Open box");
         dialogue_box.style.transform = "translate(-50% , -50%) scale(1)";
         user_container.classList.add("blur");
     }
     
 function closeBox() {
-        console.log("Close box");
         dialogue_box.style.transform = "translate(-50% , -50%) scale(0)";
         user_container.classList.remove("blur");
     }

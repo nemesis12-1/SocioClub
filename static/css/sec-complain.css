@@ -12,6 +12,9 @@ body {
     flex-direction: column;
 
 }
+nav{
+    z-index: 4;
+}
 
 .sec-container {
     background-color: #232325;
@@ -62,7 +65,10 @@ body {
 
 .sec-right-form {
     width: 80%;
+    z-index: 2;
+    overflow-y: hidden;
     display: flex;
+    padding: -1rem;
     flex-direction: column;
     justify-content: center;
     align-items: center;

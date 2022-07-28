@@ -24,14 +24,11 @@ body {
 
 .sec-left {
     width: 70%;
-    /* height: 100%; */
     background-color: #484748;
 }
 
 .sec-right {
     width: 30%;
-    /* height: 100%; */
-    /* background-color: #15fec4; */
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -47,7 +44,6 @@ body {
 
 .sec-right-text p {
     text-align: left;
-    /* background-color: green; */
     width: 80%;
     margin-bottom: 1rem;
     padding: 0.5rem;
@@ -55,7 +51,6 @@ body {
 
 .sec-right-text h5 {
     text-align: center;
-    /* background-color: rgb(151, 185, 29); */
     width: 80%;
     margin-bottom: 1rem;
 }
@@ -81,7 +76,6 @@ body {
     margin: 1.5rem;
     width: 80%;
     padding: 0.5rem;
-    /* background-color: red; */
 
 }
 
@@ -132,16 +126,10 @@ input[type=text] {
 
 .sec-right .sec-right-form form input[type=submit]:hover {
 
-    /* font-size: 20px; */
     letter-spacing: 2px;
     color: black;
 
 }
-
-
-
-
-
 
 
 .sec-left h3 {
@@ -156,7 +144,6 @@ input[type=text] {
 }
 
 table {
-    /* margin-top: 10px; */
     border-collapse: collapse;
     width: 100%;
     font-family: 'Montserrat', sans-serif;
@@ -210,14 +197,6 @@ tbody{
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 }
 
-/*
--- TO DO LIST --
-button animation
-button size fix
-
-
-*/
-
 
 .select-btn{
 
@@ -227,7 +206,6 @@ button size fix
     color: white;
     border-radius: 0.5rem;
     cursor: pointer;
-    /* margin-left: 0.5rem; */
 }
 
 .select-btn:hover{
@@ -252,17 +230,14 @@ textarea {
 .desc{
     max-width: 20rem;
     word-wrap: break-word;
-    /* background-color: red; */
 }
 
 .name{
     width: 20%;
-    /* background-color: yellow; */
 }
 
 .date{
     width: 15%;
-    /* background-color: green; */
 }
 .add-update{
 

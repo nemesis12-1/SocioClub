@@ -62,9 +62,18 @@
                 <input name="pass2" type="text" class="hide">
 
                 <label>Phone No.</label>
+                {% if error == "Phone No Already Exists" %}
+                <input name="phone" type="tel" pattern="[0-9]{10}" required id="phone" class="error" placeholder="{{error}}" value="">
+                {% else %}
                 <input name="phone" type="tel" pattern="[0-9]{10}" required id="phone">
+                {% endif %}
+
                 <label>Flat / Wing No.</label>
+                {% if error == "Flat No Already Exists" %}
+                <input name="flatno" type="text" required id="flat" class="error" placeholder="{{error}}" value="">
+                {% else %}
                 <input name="flatno" type="text" required id="flat">
+                {% endif %}
                 <label>Society Name</label>
                 <select name="society_name" required id="society_name">
                     <option value="" disabled selected hidden>- Select Your Society -</option>
@@ -120,33 +129,31 @@
     next.onclick = function () {
 
         for (i = 0; i < form1_inputs.length; i++) {
-            // console.log(form1_inputs[i]);
             if (!form1_inputs[i].reportValidity()) {
-                console.log("-------");
-                console.log("");
-                console.log(form1_inputs[i]);
-                console.log("is wrong");
                 allValid = false;
                 break;
             }
             allValid = true;
         }
 
-        // if (form1_inputs[3].value.length < 6 && form1_inputs[4].value.length < 6) {
-        //     form1_inputs[3].value = "";
-        //     form1_inputs[4].value = "";
-        //     allValid = false;
-        // }
-        // if (form1_inputs[3].value != form1_inputs[4].value) {
-        //     allValid = false;
-        //     form1_inputs[3].value = "";
-        //     form1_inputs[4].value = "";
-        //     form1_inputs[3].placeholder = "PASSWORDS DO NOT MATCH";
-        //     form1_inputs[4].placeholder = "PASSWORDS DO NOT MATCH";
-        //     // form1_inputs[3].focus();
-        //     document.getElementById("password1").focus();
+        if (form1_inputs[4].value.length < 6 && form1_inputs[5].value.length < 6) {
+            form1_inputs[4].value = "";
+            form1_inputs[5].value = "";
+            form1_inputs[4].placeholder = "PASSWORD SHOULD BE GREATER THAN 6 LETTERS";
+            form1_inputs[5].placeholder = "PASSWORD SHOULD BE GREATER THAN 6 LETTERS";
+            allValid = false;
+            document.getElementById("password1").focus();
+            return false;
+        }
+        if (form1_inputs[4].value != form1_inputs[5].value) {
+            allValid = false;
+            form1_inputs[4].value = "";
+            form1_inputs[5].value = "";
+            form1_inputs[4].placeholder = "PASSWORDS DO NOT MATCH";
+            form1_inputs[5].placeholder = "PASSWORDS DO NOT MATCH";
+            document.getElementById("password1").focus();
 
-        // }
+        }
 
         if (allValid) {
             form1.style.left = "-150%";
@@ -163,11 +170,6 @@
         form1.style.left = "0";
         form2.style.left = "150%";
     }
-
-    // console.log("form2 inputs: ")
-    // for (i = 0; i < form2_inputs.length; i++) {
-    //         console.log(form2_inputs[i])
-    //     }
 
 
     {% if error %}
@@ -195,6 +197,16 @@
     document.getElementById("email").classList.add("error");
     document.getElementById("email").focus();
     {% endif %}
+
+    {% if error == "Flat No Already Exists" %}
+    document.getElementById("flat").value = "";
+    {% endif %}
+
+    {% if error == "Phone No Already Exists" %}
+    document.getElementById("phone").value = "";
+    {% endif %}
+
+
 
 
 </script>

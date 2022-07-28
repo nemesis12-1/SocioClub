@@ -2,7 +2,6 @@
     margin: 0%;
     padding: 0%;
     box-sizing: border-box;
-    /* font-family: 'Cantarell', sans-serif; */
     font-family: 'Montserrat', sans-serif;
 }
 
@@ -16,7 +15,6 @@ body {
     display: flex;
     /* max-height: calc(100% - (2% + 2rem + 1.2rem)); */
     flex: 1;
-    /* background-color: lightblue; */
 }
 
 .left-main {
@@ -32,18 +30,15 @@ body {
 .left-main img {
     width: 100%;
     padding: 15px;
-    /* height: 100vh; */
 }
 
 .right-main {
-    /* height: 100vh; */
     width: 60%;
     display: flex;
     justify-content: center;
     background-color: white;
     
 
-    /* padding-right: 10%; */
 }
 
 .heading-right {

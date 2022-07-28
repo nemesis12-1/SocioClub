@@ -9,7 +9,6 @@
 
 {% block mainblock %}
 
-<!-- <div class="box1 bottom"></div> -->
 <div class="box1 right"></div>
 <div class="box2"></div>
 <div class="box3"></div>
@@ -22,8 +21,7 @@
 
         {% if user.is_authenticated %}
         <div class="user-auth-btn">
-            <!-- <a href="{% url 'logout' %}" class="btn">Welcome {{user.get_username}} </a> -->
-            <a onclick="openSideNav()" class="btn">Welcome {{user_firstname}} </a>
+            <a href="{% url 'user_profile' %}" class="btn">Welcome {{user_firstname}} </a>
             <a href="{% url 'logout' %}" class="btn">Logout</a>
         </div>
         {% else %}
@@ -37,41 +35,7 @@
 </div>
 
 
-<script>
-
-    // window.addEventListener('load', function () {
-        // document.querySelector(".right").style.width = "35vw";
-        // document.querySelector(".right").style.borderRight = "2px solid #15fec4";
-        // document.querySelector(".right").style.height = "25vh";
-
-        // document.querySelector(".bottom").style.borderBottom = "2px solid #15fec4";
-        // document.querySelector(".bottom").style.width = "35vw";
-        // setTimeout(function () {
-        //     console.log("I am doing it");
-        //     document.querySelector(".box1").style.width = "35vw";
-            // document.querySelector(".box1").style.borderRight = "2px solid #15fec4";
-        //     document.querySelector(".box1").style.height = "25vh";
-        // }, 1000);
-
-        // document.querySelector(".right").style.borderRight = "2px solid #15fec4";
-    // })
-
-</script>
-
-
 
 {% endblock %}
 
 
-<!-- 
-
-        colors
-
-        red :#ff436a
-        aqua: #15fec4
-        purple: #8267ff
-        yellow: #ffec61
-
-        grass green: #7ed957
-        logo blue: #38b6ff
-     -->

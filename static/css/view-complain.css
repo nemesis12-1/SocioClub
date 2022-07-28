@@ -19,14 +19,11 @@ nav .right a {
 }
 
 nav .right .active {
-    /* border-bottom: 2px solid #ff436a; */
     border-bottom: 2px solid #fff;
 }
 
 nav .right a::before {
-    /* background: linear-gradient(90deg, #ee7752, #e73c7e, #23a6d5, #23d5ab); */
     background: rgba(255, 255, 255, 0.11);
-
 }
 
 nav .right a:hover::before {
@@ -36,9 +33,7 @@ nav .right a:hover::before {
 .view-complain-container {
     display: flex;
     flex-direction: column;
-    /* flex: 1; */
     height: calc(100% - (2% + 3.5rem + 1.2rem  ));
-    /* position: relative; */
     justify-content: center;
     align-items: center;
     width: 100%;
@@ -83,11 +78,9 @@ nav .right a:hover::before {
 table { 
 	width: 100%; 
 	border-collapse: collapse; 
-    /* background-color: #23d5ab; */
 }
 
 thead th { 
-	/* background: transparent;  */
     background-color: white;
 	color: black; 
 	font-weight: bold; 
@@ -98,9 +91,6 @@ thead th {
  tbody
  {
     height: 70%;
-    
-    
-    /* background-color: #e73c7e; */
  }
 
  th{
@@ -121,17 +111,13 @@ td {
 	}
 
 .view-box {
-    /* position: absolute; */
-    /* right: 10%;
-    top: 8%;
-    transform: translate(-50%, -50%); */
-    /* background-color:#ee7752; */
+    
     background: linear-gradient(45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
     background-size: 400% 400%;
     animation: gradient 10s ease infinite;
     width: 40%;
     display: flex;
-    /* flex-direction: column; */
+    
     align-items: center;
     justify-content: space-evenly;
     height: 10%;
@@ -150,7 +136,6 @@ td {
 .view-box a {
 
     text-decoration: none;
-    /* background-color: #38b6ff; */
     background: linear-gradient(45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
     background-size: 400% 400%;
     animation: gradient 10s ease infinite;
@@ -166,7 +151,7 @@ td {
 
 .view-box a:hover {
 
-    /* font-size: 20px; */
+  
     letter-spacing: 2px;
     background-color: #e73c7e;
     transition: 0.2s ease;
@@ -175,21 +160,14 @@ td {
 
 .th-1{
     width: 10%;
-    /* background-color: red; */
 }
 .th-2 {
     width: 10%;
-    /* background-color: rgb(53, 244, 0); */
     
 }
 
 .th-4 ,.th-3{
    
     width: 30%;
-    /* background-color: rgb(0, 234, 255); */
-}
-.th-5{
-    
-    /* width: 10%;background-color: rgb(255, 0, 225); */
 }
 

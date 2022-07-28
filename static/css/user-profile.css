@@ -16,10 +16,6 @@ body {
 .user-profile-container{
     display: flex;
     flex: 1 0 0;
-    /* filter: blur(4px); */
-   
-   /* background-color: #232325; */
-    /* color: black; */
 }
 
 .user-profile-left{
@@ -27,12 +23,10 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    /* text-align: center; */
-    /* background-color: red; */
+    
 }
 
 .user-upper h3{
-    /* background-color: green; */
     color: black;
     font-size: 60px;
     font-weight: bolder;
@@ -43,7 +37,6 @@ body {
 
 .user-lower{
     display: flex;
-    /* background-color: rgb(163, 44, 44); */
     color: black;
     align-items: center;
     justify-content: center;
@@ -56,15 +49,12 @@ body {
 .user-img img{
 height: 15rem;
 width: auto;
-/* background-color: aqua; */
 }
 
 .user-lower .user-profile-details{
-/* background-color: palevioletred; */
 color: black;
 display: flex;
 flex-direction: column;
-/* flex: 1; */
 width:50%;
 align-items: left;
 justify-content: center;
@@ -80,7 +70,6 @@ overflow-x: visible;
 
 .user-profile-delete-btn{
 
-  /* background-color: rgb(8, 7, 7); */
   width: 100%;
   font-size: 1.5rem;
   padding: 5rem 1.5rem;
@@ -97,7 +86,6 @@ overflow-x: visible;
     padding: 0.5rem 5rem;
     width: 40%;
     border: none;
-    /* margin: auto; */
     margin-bottom: 1rem;
     border-radius: 4px;
     cursor: pointer;
@@ -109,7 +97,6 @@ overflow-x: visible;
 }
 
 .user-profile-delete-btn a:hover{
-     /* font-size: 20px; */
      letter-spacing: 2px;
      color: black;
 }
@@ -117,7 +104,6 @@ overflow-x: visible;
 
 .user-profile-right{
     width: 40%;
-    /* background-color: blue  ; */
     color: black;
     display: flex;
     flex-direction: column;
@@ -132,7 +118,6 @@ overflow-x: visible;
 
 .user-profile-form{
     width: 80%;
-    /* background-color: red; */
     display: flex;
    
     
@@ -184,7 +169,7 @@ input[type=submit]{
 
 input[type=submit]:hover {
 
-    /* font-size: 20px; */
+   
     letter-spacing: 2px;
     color: black;
 
@@ -198,19 +183,17 @@ input[type=submit]:hover {
     left: 50%;
     transform: translate(-50% , -50%) scale(0);
     z-index: 4;
-    /* display: none; */
+   
     transition: 0.2s ease-in-out;
-    /* transform: scale(1); */
+    
     
 }
 .box{
     background-color: antiquewhite;
-    /* height: 20rem;
-    width: 20rem; */
+    
     padding: 1rem;
     color: black;
     
-    /* transition: 2s ease-in-out; */
     border-radius: 1rem;
 }
 
