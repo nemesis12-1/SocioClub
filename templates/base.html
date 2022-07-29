@@ -58,11 +58,13 @@
         <div class="right">
             <a href="{% url 'index' %}" class="{% if request.path == index %} active {%endif%}">Home</a>
             {% if user_type.user_type == 2 %}
-            <a href="{% url 'sec_complain' %}" class="{% if request.path == sec_complain %} active {%endif%}">Complain</a>
+            <a href="{% url 'sec_complain' %}"
+                class="{% if request.path == sec_complain %} active {%endif%}">Complain</a>
             <a href="{% url 'sec_event' %}" class="{% if request.path == sec_event %} active {%endif%}">Event</a>
             <a href="{% url 'sec_main' %}" class="{% if request.path == sec_main %} active {%endif%}">Maintenance</a>
             {% else %}
-            <a href="{% url 'complain' %}" class="{% if request.path == complain or request.path == add_complain %} active {%endif%}">Complain</a>
+            <a href="{% url 'complain' %}"
+                class="{% if request.path == complain or request.path == add_complain %} active {%endif%}">Complain</a>
             <a href="{% url 'event' %}" class="{% if request.path == event %} active {%endif%}">Event</a>
             <a href="{% url 'maintenance' %}"
                 class="{% if request.path == maintenance %} active {%endif%}">Maintenance</a>
@@ -80,15 +82,18 @@
         </span>
 
         <div class="user-profile-data">
+            {% if request.user.is_authenticated %}
             <h6>Name : {{request.user.first_name}} {{request.user.last_name}}</h6>
             <h6>Username : {{request.user}}</h6>
             <h6>Email : {{request.user.email}}</h6>
+            {% endif %}
+
 
             <div class="user-btn">
                 {% if request.user.is_authenticated %}
                 <a href="{% url 'user_profile' %}">User Profile</a>
                 <a href="{% url 'logout' %}">Logout</a>
-               
+
                 {% else %}
                 <a href="{% url 'signup' %}">Sign up </a>
                 {% endif %}

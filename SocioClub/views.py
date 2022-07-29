@@ -112,7 +112,9 @@ def log_out(request):
 
 
 def contact_us(request):
-    user_type = User_Detail.objects.get(user=request.user)
+    user_type = None
+    if request.user.is_authenticated:
+        user_type = User_Detail.objects.get(user=request.user)
     if request.method == "POST":
         contact_subject = request.POST['contact_subject']
         contact_description = request.POST['contact_description']
@@ -358,6 +360,12 @@ def user_profile(request):
         user_phone = request.POST.get('user-profile-phone')
         password = request.POST.get('confirm-password')
         matchpass = check_password(password, request.user.password)
+        if User.objects.filter(email=user_email).exists():
+            email = User.objects.get(username=request.user).email
+            if User.objects.get(email=user_email).email != email:
+                return render( request , "user-profile.html" ,{'email_error':'Email Already Exists', 'society_name': society_name , 'phone': phone, 'flat_no': flat_no, 'user_type':user_type })
+        if User_Detail.objects.filter(phone=user_phone).exists() and User_Detail.objects.get(user=request.user).phone != phone:
+                return render( request , "user-profile.html" ,{'phone_error':'Phone Number Already Exists', 'society_name': society_name , 'phone': phone, 'flat_no': flat_no, 'user_type':user_type })
         if matchpass:
             fullname = user_name
             fullname.split()
@@ -374,7 +382,8 @@ def user_profile(request):
             user.save()
             user_details.save()
         else:
-            return render( request , "user-profile.html" ,{'error':'Password is incorrect', 'society_name': society_name , 'phone': phone, 'flat_no': flat_no, 'user_type':user_type })
+            return render( request , "user-profile.html" ,{'pass_error':'Password is incorrect', 'society_name': society_name , 'phone': phone, 'flat_no': flat_no, 'user_type':user_type })
+        return redirect('user_profile')
     return render( request , "user-profile.html" ,{'society_name': society_name , 'phone': phone, 'flat_no': flat_no, 'user_type':user_type })
 
 

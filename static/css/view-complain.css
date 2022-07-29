@@ -10,12 +10,12 @@ body {
     display: flex;
     flex-direction: column;
     height: 100vh;
-    background-image: url('../images/complain-bg.jpg');
+    background-image: url('../images/complain-bg-1.jpg');
     background-size:cover;
 }
 
 nav .right a {
-    color: white;
+    color: black;
 }
 
 nav .right .active {

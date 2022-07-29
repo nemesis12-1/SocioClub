@@ -325,6 +325,13 @@ textarea {
     align-items: center;
     width: 100%;
     gap: 1rem;
+    padding: 0.5rem;
+}
+
+.icon-text:hover {
+    background-color: #0000001f;
+    border-radius: 30px;
+    color: white;
 }
 
 .text-container {

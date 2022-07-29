@@ -71,7 +71,7 @@ nav .right a::before {
     background-color: #ff436a;
     border-radius: 7px;
     position: absolute;
-    height: calc(100% - 3px);
+    height: calc(100% - 4px);
     width: calc(100% - 4px);
     z-index: -1;
     top: 110%;

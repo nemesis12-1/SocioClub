@@ -68,16 +68,28 @@
                 {% csrf_token %}
                 <label>Name</label>
                 <input type="text" name="user-profile-name" required>
+
                 <label>Email</label>
-                <input type="Email" name="user-profile-email" required>
-                <label>Phone No.</label>
-                <input type="tel" name="user-profile-phone" pattern="[0-9]{10}" required>
-                <label for="">Confirm Password</label>
-                {% if error %}
-                <input class="error" placeholder="{{error}}" type="password" name="confirm-password">
+                {% if email_error %}
+                <input type="Email" class="error" placeholder="{{email_error}}" name="user-profile-email" required>
                 {% else %}
-                <input type="password" name="confirm-password">
+                <input type="Email" name="user-profile-email" required>
                 {% endif %}
+
+                <label>Phone No.</label>
+                {% if phone_error %}
+                <input type="tel" name="user-profile-phone" class="error" placeholder="{{phone_error}}" pattern="[0-9]{10}" required>
+                {% else %}
+                <input type="tel" name="user-profile-phone" pattern="[0-9]{10}" required>
+                {% endif %}
+
+                <label for="">Confirm Password</label>
+                {% if pass_error %}
+                <input class="error" placeholder="{{pass_error}}" type="password" name="confirm-password" required>
+                {% else %}
+                <input type="password" name="confirm-password" required>
+                {% endif %}
+
                 <input type="Submit" value="Edit">
     
     
