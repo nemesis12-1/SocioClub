@@ -4,9 +4,13 @@
 
 
 {%block cssblock%}
-<link rel="stylesheet" href="{% static 'css/contact.css'%}"> {%endblock%}
+<link rel="stylesheet" href="{% static 'css/contact.css'%}"> 
+{%endblock%}
+
+
 
 {% block mainblock %}
+
 <div class="header">
 
     <!--Content before waves-->
@@ -173,7 +177,6 @@
 
 </div>
 
-
 <script>
 
     ashu_card = document.getElementById("ashu-card");
@@ -197,8 +200,6 @@
     mihir_card.addEventListener('mouseout', function handleMouseOut() {
         mihir_img.src = "{% static 'images/mihir-avatar.png' %}"
     });
-
-
 
 </script>
 

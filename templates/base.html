@@ -18,11 +18,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="{% static 'images/favicon.ico' %}">
     <title>{%block titleblock%} Navbar base {%endblock%}</title>
-
     <link rel="stylesheet" href="{% static 'css/nav.css'%}">
 
     {%block cssblock%} {%endblock%}
-
 
     <link
         href="https://fonts.googleapis.com/css2?family=Cantarell:wght@700&family=Montserrat:wght@300&family=Oswald:wght@500&family=Source+Code+Pro&display=swap"
@@ -32,26 +30,11 @@
 </head>
 
 <body>
-
-
-    <script>
-
-        function admin() {
-            window.open("http://127.0.0.1:8000/admin", "_blank");
-        }
-
-        function openSideNav() {
-            document.getElementById("sideNav").style.right = "0";
-        }
-
-        function closeSideNav() {
-            document.getElementById("sideNav").style.right = "-20%";
-        }
-
-    </script>
+    {%block scriptblock%}
+    {%endblock%}
 
     <nav>
-        <div class="left" onclick="admin()">
+        <div class="left" onclick="home()">
             <!-- LOGO -->
             <img src="{% static 'images/logo1.png' %}" alt="LOGO">
         </div>
@@ -106,6 +89,19 @@
     {%block mainblock%}
     {%endblock%}
 
+    <script>
+        function home() {
+            window.open("{% url 'index' %}");
+        }
+
+        function openSideNav() {
+            document.getElementById("sideNav").style.right = "0";
+        }
+
+        function closeSideNav() {
+            document.getElementById("sideNav").style.right = "-20%";
+        }
+    </script>
 
 </body>
 
