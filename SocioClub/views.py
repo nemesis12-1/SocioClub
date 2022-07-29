@@ -195,10 +195,6 @@ def event(request):
     return render(request, "event.html", {'ongoing_event': ongoing_event, 'upcoming_event': upcoming_event})
 
 
-def test(request):
-    maintenance_data = Maintenance.objects.filter(maintenance_user = request.user).order_by('-maintenance_month')
-    return render(request, "test.html", {'maintenance_data': maintenance_data})
-
 @login_required(login_url='login')
 def sec_main(request):
     user_type = User_Detail.objects.get(user=request.user)

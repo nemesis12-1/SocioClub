@@ -1,0 +1,1 @@
+web: gunicorn SocioClub.wsgi --log-file -

@@ -1,1 +1,0 @@
-Change sec_event, sec_maintenance form action from localhost to herokuapp host

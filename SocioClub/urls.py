@@ -3,6 +3,10 @@ from django.contrib import admin
 from django.urls import path, include
 from . import views
 
+from django.conf import settings
+from django.views.static import serve
+from django.conf.urls.static import url
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.index , name = "index"),
@@ -14,7 +18,6 @@ urlpatterns = [
     path('contact_us/', views.contact_us , name = "contact_us"),
     path('complain/', views.complain_view , name = "complain"),
     path('add_complain/', views.add_complain , name = "add_complain"),
-    path('test/', views.test , name = "test"),
     path('sec_main/', views.sec_main, name = "sec_main"),
     path('sec_complain/', views.sec_complain , name = "sec_complain"),
     path('update_complain/<int:id>/', views.update_complain , name = "update_complain"),
@@ -25,5 +28,7 @@ urlpatterns = [
     path('update_event/<int:id>/', views.update_event , name = "update_event"),
     path('user_profile/', views.user_profile , name = "user_profile"),
     path('delete_account/', views.delete_account , name = "delete_account"),
-    # path('user/', include("user_data.urls")),
+
+    url(r'^media/(?P<path>.*)$', serve,{'document_root':       settings.MEDIA_ROOT}), 
+    url(r'^static/(?P<path>.*)$', serve,{'document_root': settings.STATIC_ROOT}),
 ]
