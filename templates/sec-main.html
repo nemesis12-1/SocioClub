@@ -143,12 +143,12 @@
     }
 
     function upd_main() {
-        document.getElementById('update_form').action = "http://127.0.0.1:8000/update_main/" + update_id +"/";
+        document.getElementById('update_form').action = "{% url 'index' %}" + "update_event/" + update_id +"/";;
     }
      
     function del_main(id) {
         delete_id = id;
-        delete_form.action = "http://127.0.0.1:8000/delete_main/" + delete_id +"/";
+        delete_form.action = "{% url 'index' %}" + "delete_event/" + delete_id +"/";
         openBox();
     }
     
