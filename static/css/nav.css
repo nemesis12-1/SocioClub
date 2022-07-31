@@ -104,15 +104,16 @@ height: 2rem;
 }
 
 #sideNav {
-    position: absolute;
-    right: -20%;
-    height: 100vh;
-    width: 20%;
-    background-color:#ff436a ;
+    position: fixed;
+    right: 0;
+    height: 100%;
+    width: 0;
+    background-color: #ff436a;
     transition: 0.4s ease-in-out;
     z-index: 3;
     display: flex;
     flex-direction: row-reverse;
+    overflow: hidden;
 }
 
 .cross {
@@ -229,4 +230,92 @@ background-color: white;
 
 .error::placeholder {
     color: red;
+}
+
+
+.phone-menu {
+    /* background-color: aqua; */
+    padding: 2rem;
+    height: 5.5rem;
+    text-align: center;
+}
+
+
+.phone-menu div {
+    width: 2rem;
+    height: 0.1rem;
+    background-color: black;
+    margin: 0.5rem 0;
+}
+
+.phone-menu, .phone-nav {
+    display: none;
+}
+
+@media only screen and (max-width : 1024px) {
+
+
+    nav .right a {
+        margin: 0.5rem;
+    }
+
+    .user-profile {
+        margin-right: 1rem;
+    }
+    
+    .left img{
+        height: 150%;
+    }
+
+    nav{
+        font-size: 1.1rem;
+        height: 2rem;
+        padding: 5% 0;
+    }
+
+    
+}
+
+@media only screen and (max-width : 420px) {
+
+    nav {
+        box-shadow: none;
+    }
+
+    .phone-menu, .phone-nav {
+        display: inline-block;
+    }
+
+    nav .right {
+        display: none;
+    }
+
+    
+    .left img {
+        height: 100%;
+    }
+    .left img {
+        position: absolute;
+        top: 63%;
+        left: 60%;
+        transform: translate(-50%, -50%);
+        
+    }
+    .cross {
+        width: 2rem;
+        margin: 0rem 1rem 0 0;
+    }
+    
+    #sideNav {
+        width: 100%;
+        height: 0;
+    }
+
+    .user-btn{
+        margin-top: 1.5rem;
+    }
+
+    
+    
+    
 }

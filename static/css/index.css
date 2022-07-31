@@ -156,4 +156,76 @@ nav {
 }
 
 
+@media only screen and (max-width : 1024px) {
+
+    .main-box {
+        margin-top: -8%;
+    }
+     
+    .btn{
+        padding: 0.8rem 1.2rem;
+        height: 3rem;
+    }
+    .headline-box a{
+        font-size: 1rem;
+    }
+     
+  
+    .box1 {
+        width: 15rem;
+        height: 12rem;
+    }
+
+
+    .box2 {
+        height: 13rem;
+        width: 16rem;
+    }
+
+    
+
+
+}
+
+@media only screen and (max-width : 420px) {
+    .image-box {
+        display: none;
+    }
+
+    .headline-box {
+        width: 100%;
+        max-width: 70%;
+        justify-content: center;
+    }
+
+    .headline-box h1 {
+        text-align: center;
+        font-size: 4rem;
+        margin-top: -5rem;
+    }
+
+    .headline-box h3 {
+        margin-top: 2rem;
+        font-size: 1rem;
+        text-align: center;
+    }
+    
+    .box1 , .box2 , .box3 , .box4{
+
+        display: none;
+    }
+
+    .user-auth-btn{
+        
+
+        margin-top: 2.5rem;
+        flex-direction: column;
+    }
+
+
+
+
+}
+
+
 

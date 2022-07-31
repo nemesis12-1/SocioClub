@@ -98,10 +98,10 @@
                         <thead>
 
                             <tr>
-                                <th class="th-1">Name</th>
-                                <th class="th-2">Content</th>
-                                <th class="th-3">Start Date</th>
-                                <th class="th-4">End Date</th>
+                                <th class="th-1-2">Name</th>
+                                <th class="th-2-2">Description</th>
+                                <th class="th-3-2">Start Date</th>
+                                <th class="th-4-2">End Date</th>
                             </tr>
                         </thead>
 
@@ -112,7 +112,7 @@
                             {% for event in upcoming_event %}
                             <tr>
                                 <td>{{event.event_name}}</td>
-                                <td class="th-2">{{event.event_description}}</td>
+                                <td class="th-2-2">{{event.event_description}}</td>
                                 <td>{{event.event_start_date}}</td>
                                 <td>{{event.event_end_date}}</td>
                             </tr>

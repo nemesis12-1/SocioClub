@@ -215,3 +215,48 @@ input[type=submit]:hover {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
     
 }
+
+
+@media only screen and (max-width : 420px) {
+
+    body {
+        overflow: scroll;
+    }
+    .user-profile-left{
+        width: 100%;
+        align-items: center;
+    }
+
+    .user-profile-container{
+        flex-direction: column;
+    }
+    .user-upper h3{
+        margin-top: 1rem;
+        font-size: 2rem;
+        padding: 1rem 0;
+    }
+    .user-img{
+        display: none;
+    }
+    .user-lower{
+        margin-top: 1rem;
+        flex-direction: column;
+    }
+
+    .user-lower .user-profile-details {
+        color: black;
+        width: 101%; 
+        padding-left: 1rem; 
+    }
+
+    .user-profile-right {
+        width: 100%;
+        margin: 10% 0;
+    }
+    .user-profile-delete-btn {
+
+        padding: 2rem 1.5rem;
+        
+    }
+
+}

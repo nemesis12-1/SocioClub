@@ -141,12 +141,26 @@ td {
     width: 20%;
 }
 .th-2{
-    max-width: 20rem;
+    
+    width:39% ;
     word-wrap: break-word;
 }
 .th-3 , .th-4{
     width: 15%;
 }
+
+.th-1-2{
+    width: 20%;
+}
+.th-2-2{
+    
+    width:39% ;
+    word-wrap: break-word;
+}
+.th-3-2 , .th-4-2{
+    width: 15%;
+}
+
 
 .animate {
     -webkit-animation-duration: 1s;
@@ -234,4 +248,12 @@ td {
   .fadeInRight {
     -webkit-animation-name: fadeInRight;
     animation-name: fadeInRight;
+  }
+
+
+  @media only screen and (max-width : 420px) {
+
+.event-card{
+    width: 100%;
+}
   }

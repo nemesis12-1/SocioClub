@@ -34,10 +34,12 @@
     {%endblock%}
 
     <nav>
+
         <div class="left" onclick="home()">
             <!-- LOGO -->
             <img src="{% static 'images/logo1.png' %}" alt="LOGO">
         </div>
+
         <div class="right">
             <a href="{% url 'index' %}" class="{% if request.path == index %} active {%endif%}">Home</a>
             {% if user_type.user_type == 2 %}
@@ -53,10 +55,19 @@
                 class="{% if request.path == maintenance %} active {%endif%}">Maintenance</a>
             {% endif %}
             <a href="{% url 'contact_us' %}" class="{% if request.path == contact_us %} active {%endif%}">Contact Us</a>
+            {% if request.user.is_authenticated %}
             <div class="user-profile" onclick="openSideNav()">
-                <img src="{% static 'images/user.png' %}" alt="Illustration">
+                <img src="{% static 'images/user.png' %}" alt="">
             </div>
+            {% endif %}
         </div>
+
+        <div class="phone-menu" onclick="openSideNav()">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+
     </nav>
 
     <div id="sideNav">
@@ -66,11 +77,32 @@
 
         <div class="user-profile-data">
             {% if request.user.is_authenticated %}
-            <h6>Name : {{request.user.first_name}} {{request.user.last_name}}</h6>
-            <h6>Username : {{request.user}}</h6>
-            <h6>Email : {{request.user.email}}</h6>
+            <h6 class="phone-hide">Name : {{request.user.first_name}} {{request.user.last_name}}</h6>
+            <h6 class="phone-hide">Username : {{request.user}}</h6>
+            <h6 class="phone-hide">Email : {{request.user.email}}</h6>
             {% endif %}
 
+            <div class="phone-nav">
+                <div class="user-btn">
+                    <a href="{% url 'index' %}" class="{% if request.path == index %} active {%endif%}">Home</a>
+                    {% if user_type.user_type == 2 %}
+                    <a href="{% url 'sec_complain' %}"
+                        class="{% if request.path == sec_complain %} active {%endif%}">Complain</a>
+                    <a href="{% url 'sec_event' %}"
+                        class="{% if request.path == sec_event %} active {%endif%}">Event</a>
+                    <a href="{% url 'sec_main' %}"
+                        class="{% if request.path == sec_main %} active {%endif%}">Maintenance</a>
+                    {% else %}
+                    <a href="{% url 'complain' %}"
+                        class="{% if request.path == complain or request.path == add_complain %} active {%endif%}">Complain</a>
+                    <a href="{% url 'event' %}" class="{% if request.path == event %} active {%endif%}">Event</a>
+                    <a href="{% url 'maintenance' %}"
+                        class="{% if request.path == maintenance %} active {%endif%}">Maintenance</a>
+                    {% endif %}
+                    <a href="{% url 'contact_us' %}"
+                        class="{% if request.path == contact_us %} active {%endif%}">Contact Us</a>
+                </div>
+            </div>
 
             <div class="user-btn">
                 {% if request.user.is_authenticated %}
@@ -90,17 +122,35 @@
     {%endblock%}
 
     <script>
+        var phone_hide = document.querySelectorAll(".phone-hide");
+        if (window.matchMedia("(max-width: 420px)").matches) {
+            for (let i = 0; i < phone_hide.length; i++) {
+                phone_hide[i].style.display = "none";
+            }
+        }
+
         function home() {
             window.open("{% url 'index' %}");
         }
 
         function openSideNav() {
-            document.getElementById("sideNav").style.right = "0";
+            if (window.matchMedia("(max-width: 420px)").matches) {
+                document.getElementById("sideNav").style.height = "100%";
+            }
+            else {
+                document.getElementById("sideNav").style.width = "20%";
+            }
         }
 
         function closeSideNav() {
-            document.getElementById("sideNav").style.right = "-20%";
+            if (window.matchMedia("(max-width: 420px)").matches) {
+                document.getElementById("sideNav").style.height = "0";
+            }
+            else {
+                document.getElementById("sideNav").style.width = "0";
+            }
         }
+
     </script>
 
 </body>
